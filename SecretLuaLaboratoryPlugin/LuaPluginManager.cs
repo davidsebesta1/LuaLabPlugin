@@ -2,8 +2,8 @@
 using PluginAPI.Core;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
+using System.Linq;
 
 namespace LuaLab
 {
@@ -14,6 +14,25 @@ namespace LuaLab
         public LuaPluginManager()
         {
             LoadScriptsFromFolder(Path.Combine(Path.GetDirectoryName(PluginHandler.Get(Plugin.Instance).MainConfigPath), "LuaPlugins"));
+        }
+
+        public void UnloadAllPlugins()
+        {
+            while (_plugins.Count > 0)
+            {
+                var kvp = _plugins.ElementAt(0);
+
+                UnloadPlugin(kvp.Key);
+            }
+        }
+
+        public void UnloadPlugin(string name)
+        {
+            if (_plugins.TryGetValue(name, out LuaPlugin plugin))
+            {
+                plugin.Unload();
+                _plugins.Remove(name);
+            }
         }
 
         public bool ReloadLuaPlugin(string name)
@@ -28,6 +47,14 @@ namespace LuaLab
             }
 
             return false;
+        }
+
+        public void PluginGlobalTableInsert(LuaPlugin plugin, Script script)
+        {
+            script.Globals["liveReload"] = (bool state) =>
+            {
+                Plugin.Instance.LuaLiveReloadManager.SetLiveReload(state, plugin);
+            };
         }
 
         private void LoadScriptsFromFolder(string path)
@@ -50,6 +77,8 @@ namespace LuaLab
 
                     LuaPlugin plugin = new LuaPlugin(name, file);
                     Script script = Plugin.Instance.LuaScriptManager.CreateScript(ReferenceHub.HostHub, LuaOutputType.ServerConsole, plugin);
+
+                    PluginGlobalTableInsert(plugin, script);
 
                     bool loadSuccess = RunScriptCodeFromPath(script, file);
                     loaded += Convert.ToInt32(loadSuccess);

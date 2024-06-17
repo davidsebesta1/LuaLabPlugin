@@ -1,4 +1,5 @@
 ﻿using CustomPlayerEffects;
+using HarmonyLib;
 using Interactables.Interobjects.DoorUtils;
 using InventorySystem.Items;
 using InventorySystem.Items.Firearms;
@@ -16,6 +17,9 @@ using PluginAPI.Core.Attributes;
 using PluginAPI.Core.Doors;
 using PluginAPI.Enums;
 using PluginAPI.Events;
+using System;
+using System.Linq;
+using System.Reflection;
 using static CustomPlayerEffects.StatusEffectBase;
 
 namespace LuaLab
@@ -28,6 +32,7 @@ namespace LuaLab
         public Config Config;
 
         public LuaScriptManager LuaScriptManager { get; private set; }
+        public LuaLiveReloadManager LuaLiveReloadManager { get; private set; }
 
         public LuaEventManager LuaEventManager { get; private set; }
         public LuaPlayerManager LuaPlayerManager { get; private set; }
@@ -35,13 +40,26 @@ namespace LuaLab
         public LuaServerManager LuaServerManager { get; private set; }
         public LuaPluginManager LuaPluginManager { get; private set; }
 
+        private Harmony _harmony;
+
         [PluginEntryPoint("Lua Lab", "0.9.0", "Lua in SL", "davidsebesta")]
         [PluginPriority(LoadPriority.Highest)]
         public void Start()
         {
             Instance = this;
 
+            _harmony = new Harmony("com.davidsebesta.lualab");
+            MethodInfo methodInfo = typeof(EventManager).GetMethods(BindingFlags.Public | BindingFlags.Static)
+                                   .Where(m => m.Name == "ExecuteEvent" &&
+                                               m.GetParameters().Length == 1 &&
+                                               m.GetParameters()[0].ParameterType == typeof(IEventArguments)).FirstOrDefault();
+
+            MethodInfo postfixInfo = typeof(EventManagerPatch).GetMethod("Postfix");
+            _harmony.Patch(methodInfo, postfix: new HarmonyMethod(postfixInfo));
+
             RegisterAllUserData();
+
+            LuaLiveReloadManager = new LuaLiveReloadManager();
 
             LuaEventManager = new LuaEventManager();
             LuaPlayerManager = new LuaPlayerManager();
@@ -58,11 +76,31 @@ namespace LuaLab
             EventManager.RegisterEvents(LuaPluginManager);
         }
 
+        [PluginUnload]
+        public void Unloading()
+        {
+            LuaLiveReloadManager.DisableAllLiveReloads();
+            LuaPluginManager.UnloadAllPlugins();
+        }
+
         private void RegisterAllUserData()
         {
             UserData.RegisterAssembly();
 
+            //Register SL event args
+            UserData.RegisterType<ServerEventType>();
+
+            var slEvents = typeof(IEventArguments).Assembly.GetTypes().Where(n => n.GetInterface("IEventArguments") != null && !n.IsAbstract);
+
+            MethodInfo methodInfo = typeof(UserData).GetMethod("RegisterType", [typeof(Type), typeof(InteropAccessMode), typeof(string)]);
+            foreach (Type eventType in slEvents)
+            {
+                methodInfo.Invoke(null, [eventType, InteropAccessMode.Default, null]);
+            }
+
             UserData.RegisterType<Script>();
+
+            UserData.RegisterType<EventArgs>();
 
             //Roles and items
             UserData.RegisterType<RoleTypeId>();

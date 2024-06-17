@@ -1,9 +1,10 @@
-﻿using MoonSharp.Interpreter;
+﻿using LuaLab.ObjectsWrappers.Events;
+using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
-using PluginAPI.Core;
+using PluginAPI.Events;
 using System;
 using System.Collections.Generic;
-using System.IO;
+using Log = PluginAPI.Core.Log;
 
 namespace LuaLab
 {
@@ -11,10 +12,13 @@ namespace LuaLab
     public class LuaPlugin : IEquatable<LuaPlugin>
     {
         [MoonSharpVisible(true)]
-        public event EventHandler PluginReloading;
+        public LuaEvent<MapGeneratedEvent> PluginReloading = new LuaEvent<MapGeneratedEvent>();
 
         [MoonSharpVisible(true)]
-        public event EventHandler PluginReloaded;
+        public LuaEvent<MapGeneratedEvent> PluginReloaded = new LuaEvent<MapGeneratedEvent>();
+
+        [MoonSharpVisible(true)]
+        public LuaEvent<MapGeneratedEvent> PluginUnloading = new LuaEvent<MapGeneratedEvent>();
 
         [MoonSharpVisible(true)]
         public string Name;
@@ -41,25 +45,53 @@ namespace LuaLab
         }
 
         [MoonSharpVisible(true)]
+        public void Unload()
+        {
+            try
+            {
+                PluginUnloading?.Invoke(null);
+                UnloadCurrentScript();
+            }
+            catch (Exception e)
+            {
+                Log.Raw($"<color=Red>[LuaLab] Error at unloading {Name}: {e}</color>");
+            }
+        }
+
+        private void UnloadCurrentScript()
+        {
+            if (PluginReloading != null)
+            {
+                PluginReloading.ClearHandlersForScript(Script);
+            }
+
+            if (PluginReloaded != null)
+            {
+                PluginReloaded.ClearHandlersForScript(Script);
+            }
+
+            if (PluginUnloading != null)
+            {
+                PluginUnloading.ClearHandlersForScript(Script);
+            }
+
+            Plugin.Instance.LuaEventManager.ClearHandlersForScript(Script);
+        }
+
+        [MoonSharpVisible(true)]
         public bool Reload()
         {
             bool res = false;
             try
             {
-
-                PluginReloading?.Invoke(this, null);
-                foreach (Delegate d in PluginReloading.GetInvocationList())
-                {
-                    PluginReloading -= (EventHandler)d;
-                }
-                foreach (Delegate d in PluginReloaded.GetInvocationList())
-                {
-                    PluginReloaded -= (EventHandler)d;
-                }
+                PluginReloading?.Invoke(null);
+                UnloadCurrentScript();
 
                 Script = Plugin.Instance.LuaScriptManager.CreateScript(ReferenceHub.HostHub, LuaOutputType.ServerConsole, this);
+                Plugin.Instance.LuaPluginManager.PluginGlobalTableInsert(this, Script);
                 res = Plugin.Instance.LuaPluginManager.RunScriptCodeFromPath(Script, PluginPath);
-                PluginReloaded?.Invoke(this, null);
+
+                PluginReloaded?.Invoke(null);
             }
             catch (Exception e)
             {
@@ -76,16 +108,12 @@ namespace LuaLab
         public bool Equals(LuaPlugin other)
         {
             return other is not null &&
-                   Name == other.Name &&
-                   EqualityComparer<Script>.Default.Equals(Script, other.Script);
+                   Name == other.Name;
         }
 
         public override int GetHashCode()
         {
-            int hashCode = 475330100;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Script>.Default.GetHashCode(Script);
-            return hashCode;
+            return 539060726 + EqualityComparer<string>.Default.GetHashCode(Name);
         }
 
         public static bool operator ==(LuaPlugin left, LuaPlugin right)

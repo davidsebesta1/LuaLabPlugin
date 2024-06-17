@@ -9,7 +9,6 @@ using PlayerRoles;
 using PluginAPI.Core;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 namespace LuaLab
@@ -97,6 +96,14 @@ namespace LuaLab
                 DynValue y = DynValue.NewNumber(vector.y);
                 DynValue z = DynValue.NewNumber(vector.z);
                 DynValue dynVal = DynValue.NewTable(script, [x, y, z]);
+                return dynVal;
+            });
+
+            //Player
+            Script.GlobalOptions.CustomConverters.SetClrToScriptCustomConversion<Player>(
+            (script, player) =>
+            {
+                DynValue dynVal = DynValue.FromObject(script, Plugin.Instance.LuaPlayerManager[player.ReferenceHub]);
                 return dynVal;
             });
 
