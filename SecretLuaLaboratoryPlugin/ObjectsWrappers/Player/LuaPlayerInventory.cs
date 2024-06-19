@@ -1,6 +1,8 @@
 ﻿using InventorySystem;
 using InventorySystem.Items;
+using InventorySystem.Items.Firearms;
 using InventorySystem.Items.Firearms.Ammo;
+using InventorySystem.Items.Firearms.Attachments;
 using InventorySystem.Items.Pickups;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
@@ -37,7 +39,13 @@ namespace SecretLuaLaboratoryPlugin.Objects.Player
         [MoonSharpVisible(true)]
         public ItemBase GiveItem(ItemType type)
         {
-            return _luaPlayer.Hub.inventory.ServerAddItem(type);
+            ItemBase item = _luaPlayer.Hub.inventory.ServerAddItem(type);
+            if (item is ParticleDisruptor disruptor)
+            {
+                disruptor.Status = new FirearmStatus(5, FirearmStatusFlags.Chambered, disruptor.GetCurrentAttachmentsCode());
+            }
+
+            return item;
         }
 
         [MoonSharpVisible(true)]

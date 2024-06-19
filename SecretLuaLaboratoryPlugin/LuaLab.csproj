@@ -82,13 +82,16 @@
     <Compile Include="Commands\ExecLuaCommand.cs" />
     <Compile Include="Commands\ReloadLuaPluginCommand.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Helpers\Descriptors\CustomUserDataDescriptor.cs" />
     <Compile Include="Helpers\ItemHelpers.cs" />
     <Compile Include="Helpers\PlayerHelper.cs" />
-    <Compile Include="LuaLiveReloadManager.cs" />
+    <Compile Include="LuaPluginReloadManager.cs" />
     <Compile Include="LuaPlugin.cs" />
     <Compile Include="LuaPluginManager.cs" />
+    <Compile Include="ObjectsWrappers\DamageHandlers\LuaStandardDamageHandler.cs" />
     <Compile Include="ObjectsWrappers\Events\ILuaEvent.cs" />
     <Compile Include="ObjectsWrappers\Events\LuaEvent.cs" />
+    <Compile Include="ObjectsWrappers\Facility\LuaCassie.cs" />
     <Compile Include="ObjectsWrappers\Facility\LuaDoor.cs" />
     <Compile Include="ObjectsWrappers\Items\LuaFirearmItem.cs" />
     <Compile Include="ObjectsWrappers\Items\Pickups\LuaAmmoItemPickup.cs" />

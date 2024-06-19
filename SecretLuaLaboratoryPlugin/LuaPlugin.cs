@@ -12,6 +12,9 @@ namespace LuaLab
     public class LuaPlugin : IEquatable<LuaPlugin>
     {
         [MoonSharpVisible(true)]
+        public LuaEvent<MapGeneratedEvent> PluginLoaded = new LuaEvent<MapGeneratedEvent>();
+
+        [MoonSharpVisible(true)]
         public LuaEvent<MapGeneratedEvent> PluginReloading = new LuaEvent<MapGeneratedEvent>();
 
         [MoonSharpVisible(true)]
@@ -45,12 +48,33 @@ namespace LuaLab
         }
 
         [MoonSharpVisible(true)]
+        public bool Load()
+        {
+            bool loadSuccess = false;
+            try
+            {
+                Script script = Plugin.Instance.LuaScriptManager.CreateScript(ReferenceHub.HostHub, LuaOutputType.ServerConsole, this);
+
+                Plugin.Instance.LuaPluginManager.PluginGlobalTableInsert(this, script);
+
+                loadSuccess = Plugin.Instance.LuaPluginManager.RunScriptCodeFromPath(script, PluginPath);
+
+                PluginLoaded.Invoke(null);
+            }
+            catch (Exception e)
+            {
+                Log.Raw($"<color=Red>[LuaLab] Error at unloading {Name}: {e}</color>");
+            }
+            return loadSuccess;
+        }
+
+        [MoonSharpVisible(true)]
         public void Unload()
         {
             try
             {
                 PluginUnloading?.Invoke(null);
-                UnloadCurrentScript();
+                UnloadCurrentScriptEvents();
             }
             catch (Exception e)
             {
@@ -58,34 +82,45 @@ namespace LuaLab
             }
         }
 
-        private void UnloadCurrentScript()
+        [MoonSharpVisible(false)]
+        private void UnloadCurrentScriptEvents()
         {
-            if (PluginReloading != null)
-            {
-                PluginReloading.ClearHandlersForScript(Script);
-            }
-
-            if (PluginReloaded != null)
-            {
-                PluginReloaded.ClearHandlersForScript(Script);
-            }
-
-            if (PluginUnloading != null)
-            {
-                PluginUnloading.ClearHandlersForScript(Script);
-            }
+            PluginLoaded?.ClearHandlersForScript(Script);
+            PluginReloading?.ClearHandlersForScript(Script);
+            PluginReloaded?.ClearHandlersForScript(Script);
+            PluginUnloading?.ClearHandlersForScript(Script);
 
             Plugin.Instance.LuaEventManager.ClearHandlersForScript(Script);
         }
 
         [MoonSharpVisible(true)]
-        public bool Reload()
+        public bool HotReload()
         {
             bool res = false;
             try
             {
                 PluginReloading?.Invoke(null);
-                UnloadCurrentScript();
+                UnloadCurrentScriptEvents();
+
+                res = Plugin.Instance.LuaPluginManager.RunScriptCodeFromPath(Script, PluginPath);
+
+                PluginReloaded?.Invoke(null);
+            }
+            catch (Exception e)
+            {
+                Log.Raw($"<color=Red>[LuaLab] Error at reloading {Name}: {e}</color>");
+            }
+            return res;
+        }
+
+        [MoonSharpVisible(true)]
+        public bool LiveReload()
+        {
+            bool res = false;
+            try
+            {
+                PluginReloading?.Invoke(null);
+                UnloadCurrentScriptEvents();
 
                 Script = Plugin.Instance.LuaScriptManager.CreateScript(ReferenceHub.HostHub, LuaOutputType.ServerConsole, this);
                 Plugin.Instance.LuaPluginManager.PluginGlobalTableInsert(this, Script);

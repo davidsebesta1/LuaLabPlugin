@@ -10,10 +10,12 @@ namespace LuaLab
     public class LuaPluginManager
     {
         private readonly Dictionary<string, LuaPlugin> _plugins = new Dictionary<string, LuaPlugin>();
+        private readonly string _pluginDirPath;
 
         public LuaPluginManager()
         {
-            LoadScriptsFromFolder(Path.Combine(Path.GetDirectoryName(PluginHandler.Get(Plugin.Instance).MainConfigPath), "LuaPlugins"));
+            _pluginDirPath = Path.GetDirectoryName(PluginHandler.Get(Plugin.Instance).MainConfigPath);
+            LoadScriptsFromFolder(Path.Combine(_pluginDirPath, "LuaPlugins"));
         }
 
         public void UnloadAllPlugins()
@@ -39,7 +41,7 @@ namespace LuaLab
         {
             if (_plugins.TryGetValue(name, out LuaPlugin plugin))
             {
-                return plugin.Reload();
+                return plugin.HotReload();
             }
             else
             {
@@ -51,9 +53,14 @@ namespace LuaLab
 
         public void PluginGlobalTableInsert(LuaPlugin plugin, Script script)
         {
-            script.Globals["liveReload"] = (bool state) =>
+            script.Globals["LiveReload"] = (bool state) =>
             {
                 Plugin.Instance.LuaLiveReloadManager.SetLiveReload(state, plugin);
+            };
+
+            script.Globals["HotReload"] = (bool state) =>
+            {
+                Plugin.Instance.LuaLiveReloadManager.SetHotReload(state, plugin);
             };
         }
 
@@ -62,6 +69,7 @@ namespace LuaLab
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
+                Directory.CreateDirectory(Path.Combine(path, "deps"));
             }
 
             string[] files = Directory.GetFiles(path);
@@ -73,15 +81,11 @@ namespace LuaLab
                 if (Path.GetExtension(file) == ".lua")
                 {
                     string name = Path.GetFileNameWithoutExtension(file);
+
                     Log.Raw($"<color=Blue>[LuaLab] Loading {name}.lua ...</color>");
 
                     LuaPlugin plugin = new LuaPlugin(name, file);
-                    Script script = Plugin.Instance.LuaScriptManager.CreateScript(ReferenceHub.HostHub, LuaOutputType.ServerConsole, plugin);
-
-                    PluginGlobalTableInsert(plugin, script);
-
-                    bool loadSuccess = RunScriptCodeFromPath(script, file);
-                    loaded += Convert.ToInt32(loadSuccess);
+                    loaded += Convert.ToInt32(plugin.Load());
                     _plugins.Add(name, plugin);
                 }
             }

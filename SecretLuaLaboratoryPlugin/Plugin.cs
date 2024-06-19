@@ -5,6 +5,7 @@ using InventorySystem.Items;
 using InventorySystem.Items.Firearms;
 using InventorySystem.Items.Firearms.Ammo;
 using InventorySystem.Items.Pickups;
+using LuaLab.Helpers.Descriptors;
 using LuaLab.ObjectsWrappers.Effects;
 using LuaLab.ObjectsWrappers.Facility;
 using LuaLab.ObjectsWrappers.Items;
@@ -32,13 +33,14 @@ namespace LuaLab
         public Config Config;
 
         public LuaScriptManager LuaScriptManager { get; private set; }
-        public LuaLiveReloadManager LuaLiveReloadManager { get; private set; }
+        public LuaPluginReloadManager LuaLiveReloadManager { get; private set; }
 
         public LuaEventManager LuaEventManager { get; private set; }
         public LuaPlayerManager LuaPlayerManager { get; private set; }
         public LuaRoundManager LuaRoundManager { get; private set; }
         public LuaServerManager LuaServerManager { get; private set; }
         public LuaPluginManager LuaPluginManager { get; private set; }
+        public LuaCassie LuaCassie { get; private set; }
 
         private Harmony _harmony;
 
@@ -46,6 +48,11 @@ namespace LuaLab
         [PluginPriority(LoadPriority.Highest)]
         public void Start()
         {
+            if (!Config.IsEnabled)
+            {
+                return;
+            }
+
             Instance = this;
 
             _harmony = new Harmony("com.davidsebesta.lualab");
@@ -59,7 +66,7 @@ namespace LuaLab
 
             RegisterAllUserData();
 
-            LuaLiveReloadManager = new LuaLiveReloadManager();
+            LuaLiveReloadManager = new LuaPluginReloadManager();
 
             LuaEventManager = new LuaEventManager();
             LuaPlayerManager = new LuaPlayerManager();
@@ -68,6 +75,8 @@ namespace LuaLab
 
             LuaScriptManager = new LuaScriptManager();
             LuaPluginManager = new LuaPluginManager();
+
+            LuaCassie = new LuaCassie();
 
             EventManager.RegisterEvents(this);
             EventManager.RegisterEvents(LuaPlayerManager);
@@ -101,6 +110,10 @@ namespace LuaLab
             UserData.RegisterType<Script>();
 
             UserData.RegisterType<EventArgs>();
+            UserData.RegisterType<LuaEventManager>(new CustomUserDataDescriptor());
+
+            UserData.RegisterType<Team>();
+
 
             //Roles and items
             UserData.RegisterType<RoleTypeId>();

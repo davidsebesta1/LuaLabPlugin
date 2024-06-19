@@ -51,32 +51,33 @@ namespace LuaLab
             }
 
             //Global handlers
-            script.Globals["players"] = Plugin.Instance.LuaPlayerManager;
-            script.Globals["events"] = Plugin.Instance.LuaEventManager;
-            script.Globals["round"] = Plugin.Instance.LuaRoundManager;
-            script.Globals["server"] = Plugin.Instance.LuaServerManager;
-
+            script.Globals["Players"] = Plugin.Instance.LuaPlayerManager;
+            script.Globals["Events"] = Plugin.Instance.LuaEventManager;
+            script.Globals["Round"] = Plugin.Instance.LuaRoundManager;
+            script.Globals["Server"] = Plugin.Instance.LuaServerManager;
+            script.Globals["Cassie"] = Plugin.Instance.LuaCassie;
 
             //Enums
-            script.Globals["roleTypes"] = UserData.CreateStatic<RoleTypeId>();
-            script.Globals["roleChangeReason"] = UserData.CreateStatic<RoleChangeReason>();
-            script.Globals["roleSpawnFlags"] = UserData.CreateStatic<RoleSpawnFlags>();
-            script.Globals["itemType"] = UserData.CreateStatic<ItemType>();
-            script.Globals["itemCategory"] = UserData.CreateStatic<ItemCategory>();
-            script.Globals["itemTierFlags"] = UserData.CreateStatic<ItemTierFlags>();
-            script.Globals["roomShapes"] = UserData.CreateStatic<RoomShape>();
-            script.Globals["roomNames"] = UserData.CreateStatic<RoomName>();
-            script.Globals["facilityZones"] = UserData.CreateStatic<FacilityZone>();
-            script.Globals["doorLockReasons"] = UserData.CreateStatic<DoorLockReason>();
-            script.Globals["keycardPermissions"] = UserData.CreateStatic<KeycardPermissions>();
-            script.Globals["firearmStatusFlags"] = UserData.CreateStatic<FirearmStatusFlags>();
+            script.Globals["RoleTypes"] = UserData.CreateStatic<RoleTypeId>();
+            script.Globals["RoleChangeReason"] = UserData.CreateStatic<RoleChangeReason>();
+            script.Globals["RoleSpawnFlags"] = UserData.CreateStatic<RoleSpawnFlags>();
+            script.Globals["ItemType"] = UserData.CreateStatic<ItemType>();
+            script.Globals["ItemCategory"] = UserData.CreateStatic<ItemCategory>();
+            script.Globals["ItemTierFlags"] = UserData.CreateStatic<ItemTierFlags>();
+            script.Globals["RoomShapes"] = UserData.CreateStatic<RoomShape>();
+            script.Globals["RoomNames"] = UserData.CreateStatic<RoomName>();
+            script.Globals["FacilityZones"] = UserData.CreateStatic<FacilityZone>();
+            script.Globals["DoorLockReasons"] = UserData.CreateStatic<DoorLockReason>();
+            script.Globals["KeycardPermissions"] = UserData.CreateStatic<KeycardPermissions>();
+            script.Globals["FirearmStatusFlags"] = UserData.CreateStatic<FirearmStatusFlags>();
+            script.Globals["Team"] = UserData.CreateStatic<Team>();
 
             //Global functions
 
             //Items
-            script.Globals["spawnItem"] = (Func<Vector3, ItemType, ItemPickupBase>)ItemHelpers.SpawnItem;
-            script.Globals["spawnFirearm"] = (Func<Vector3, ItemType, byte, FirearmStatusFlags, uint, FirearmPickup>)ItemHelpers.SpawnGun;
-            script.Globals["spawnAmmo"] = (Func<Vector3, ItemType, ushort, AmmoPickup>)ItemHelpers.SpawnAmmo;
+            script.Globals["SpawnItem"] = (Func<Vector3, ItemType, ItemPickupBase>)ItemHelpers.SpawnItem;
+            script.Globals["SpawnFirearm"] = (Func<Vector3, ItemType, byte, FirearmStatusFlags, uint, FirearmPickup>)ItemHelpers.SpawnGun;
+            script.Globals["SpawnAmmo"] = (Func<Vector3, ItemType, ushort, AmmoPickup>)ItemHelpers.SpawnAmmo;
 
             //Vector3
             Script.GlobalOptions.CustomConverters.SetScriptToClrCustomConversion(DataType.Table, typeof(Vector3),
