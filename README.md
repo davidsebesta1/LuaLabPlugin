@@ -28,4 +28,4 @@ SCP Secret Laboratory Plugin for writing and executing scripts in Lua using Moon
 ## Lua Execution in game
 - Plugin allows specified players to execute any lua code in game via RA console.
 - Useful for doing one-time tasks that may require automation, such as setup up events, loadouts and et cetera.
-**Note that allowing players od this is a dangerous permission and should be given to trusted individual.**
+**Note that allowing players to execute code is a dangerous permission and should be given to trusted individual.**
