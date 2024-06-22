@@ -38,15 +38,15 @@ print('Markiplier'); -- Print output is redirected to server console / executing
 function onPluginLoad(args) 
     print("Sample code loaded!")
 end
-plugin.PluginLoaded.add(onPluginLoad) -- You can either pass function by declaring it somewhere else
+plugin.PluginLoaded:add(onPluginLoad) -- You can either pass function by declaring it somewhere else
 
 
-plugin.PluginLoaded.add(function(args)  -- Or you can directly add it as a anonymous function
+plugin.PluginLoaded:add(function(args)  -- Or you can directly add it as a anonymous function
     print("Sample code loaded!")
 end)
 
-Plugin.PluginReloaded.add(function(args) -- Called after the reload has been fully executed
-    if math.random() < 0.5 then
+Plugin.PluginReloaded:add(function(args) -- Called after the reload has been fully executed
+    if math:random() < 0.5 then
         print("AAAA I NEEED A MEDIC BAG")
     else
         print("ITS PAYDAY FELLAS")
