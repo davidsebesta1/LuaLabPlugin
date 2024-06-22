@@ -35,7 +35,7 @@ Code example:
 ```lua
 print('Markiplier'); -- Print output is redirected to server console / executing player RA console
 
-function onPluginLoad(args) 
+function onPluginLoad(args) -- This will be fired automatically once the plugin fully loads and only once
     print("Sample code loaded!")
 end
 plugin.PluginLoaded:add(onPluginLoad) -- You can either pass function by declaring it somewhere else
