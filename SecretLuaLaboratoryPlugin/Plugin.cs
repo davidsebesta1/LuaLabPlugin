@@ -19,6 +19,7 @@ using PluginAPI.Core.Doors;
 using PluginAPI.Enums;
 using PluginAPI.Events;
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using static CustomPlayerEffects.StatusEffectBase;
@@ -65,6 +66,7 @@ namespace LuaLab
             _harmony.Patch(methodInfo, postfix: new HarmonyMethod(postfixInfo));
 
             RegisterAllUserData();
+            LuaCassie = new LuaCassie();
 
             LuaLiveReloadManager = new LuaPluginReloadManager();
 
@@ -75,8 +77,7 @@ namespace LuaLab
 
             LuaScriptManager = new LuaScriptManager();
             LuaPluginManager = new LuaPluginManager();
-
-            LuaCassie = new LuaCassie();
+            LuaPluginManager.Init();
 
             EventManager.RegisterEvents(this);
             EventManager.RegisterEvents(LuaPlayerManager);

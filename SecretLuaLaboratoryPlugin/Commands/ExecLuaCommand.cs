@@ -17,11 +17,13 @@ namespace LuaLab.Commands
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            ReferenceHub hub = ((PlayerCommandSender)sender).ReferenceHub;
-            if (Plugin.Instance.Config.AllowExecLuaInGame && Plugin.Instance.Config.AllowedUserIds.Contains(hub.authManager.UserId))
+            PlayerCommandSender cmdSender = sender as PlayerCommandSender;
+
+            ReferenceHub hub = cmdSender?.ReferenceHub ?? ReferenceHub.HostHub;
+            if (Plugin.Instance.Config.AllowExecLuaInGame && (hub == ReferenceHub.HostHub || Plugin.Instance.Config.AllowedUserIds.Contains(hub.authManager.UserId)))
             {
                 string code = string.Join(" ", arguments);
-                Plugin.Instance.LuaScriptManager.ExecuteLuaInGame(hub, code, LuaOutputType.PlayerConsole);
+                Plugin.Instance.LuaScriptManager.ExecuteLuaInGame(hub, code, hub == ReferenceHub.HostHub ? LuaOutputType.ServerConsole : LuaOutputType.PlayerConsole);
 
                 response = "Exec script";
                 return true;

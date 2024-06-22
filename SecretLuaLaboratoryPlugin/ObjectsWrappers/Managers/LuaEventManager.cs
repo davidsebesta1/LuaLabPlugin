@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using LuaLab.ObjectsWrappers.Events;
 using MoonSharp.Interpreter;
-using PlayerStatsSystem;
 using PluginAPI.Core;
 using PluginAPI.Enums;
 using PluginAPI.Events;

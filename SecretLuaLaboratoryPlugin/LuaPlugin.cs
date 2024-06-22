@@ -24,7 +24,7 @@ namespace LuaLab
         public LuaEvent<MapGeneratedEvent> PluginUnloading = new LuaEvent<MapGeneratedEvent>();
 
         [MoonSharpVisible(true)]
-        public string Name;
+        public string Name { get; private set; }
 
         [MoonSharpVisible(true)]
         public string PluginPath;
@@ -53,17 +53,18 @@ namespace LuaLab
             bool loadSuccess = false;
             try
             {
+                Log.Info("a");
                 Script script = Plugin.Instance.LuaScriptManager.CreateScript(ReferenceHub.HostHub, LuaOutputType.ServerConsole, this);
-
+                Log.Info("b");
                 Plugin.Instance.LuaPluginManager.PluginGlobalTableInsert(this, script);
-
+                Log.Info("c");
                 loadSuccess = Plugin.Instance.LuaPluginManager.RunScriptCodeFromPath(script, PluginPath);
-
-                PluginLoaded.Invoke(null);
+                Log.Info("d");
+                PluginLoaded?.Invoke(null);
             }
             catch (Exception e)
             {
-                Log.Raw($"<color=Red>[LuaLab] Error at unloading {Name}: {e}</color>");
+                Log.Raw($"<color=Red>[LuaLab] Error at loading {Name}: {e}</color>");
             }
             return loadSuccess;
         }

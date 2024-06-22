@@ -15,6 +15,10 @@ namespace LuaLab
         public LuaPluginManager()
         {
             _pluginDirPath = Path.GetDirectoryName(PluginHandler.Get(Plugin.Instance).MainConfigPath);
+        }
+
+        public void Init()
+        {
             LoadScriptsFromFolder(Path.Combine(_pluginDirPath, "LuaPlugins"));
         }
 
@@ -102,9 +106,13 @@ namespace LuaLab
                     script.DoStream(stream);
                     return true;
                 }
-                catch (Exception e)
+                catch (InterpreterException ex)
                 {
-                    Log.Raw($"<color=Red>[LuaLab] Error at loading {Path.GetFileName(path)}: {e.Message}</color>");
+                    Log.Raw($"<color=Red>[LuaLab] Interpreter Error at executing {Path.GetFileName(path)}: {ex.DecoratedMessage}</color>");
+                }
+                catch (Exception ex)
+                {
+                    Log.Raw($"<color=Red>[LuaLab] Hard Error at executing {Path.GetFileName(path)}: {ex.Message}</color>");
                 }
 
             }

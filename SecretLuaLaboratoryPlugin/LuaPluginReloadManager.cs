@@ -161,7 +161,7 @@ namespace LuaLab
 
         private void Watcher_Changed(object sender, FileSystemEventArgs e)
         {
-            LuaPlugin plugin = _hotReloads.Keys.FirstOrDefault(n => n.PluginPath == e.FullPath);
+            LuaPlugin plugin = _hotReloads.Keys.FirstOrDefault(n => n.PluginPath == e.FullPath) ?? _liveReloads.Keys.FirstOrDefault(n => n.PluginPath == e.FullPath);
             if (plugin == null)
             {
                 return;
@@ -172,7 +172,7 @@ namespace LuaLab
 
         private void Watcher_Deleted(object sender, FileSystemEventArgs e)
         {
-            LuaPlugin plugin = _hotReloads.Keys.FirstOrDefault(n => n.PluginPath == e.FullPath);
+            LuaPlugin plugin = _hotReloads.Keys.FirstOrDefault(n => n.PluginPath == e.FullPath) ?? _liveReloads.Keys.FirstOrDefault(n => n.PluginPath == e.FullPath);
             if (plugin == null)
             {
                 return;

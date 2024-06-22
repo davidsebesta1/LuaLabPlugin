@@ -1,14 +1,7 @@
 ﻿using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
 using PlayerRoles;
-using PlayerStatsSystem;
 using PluginAPI.Core;
-using Respawning;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LuaLab.ObjectsWrappers.Facility
 {
@@ -21,7 +14,7 @@ namespace LuaLab.ObjectsWrappers.Facility
         [MoonSharpVisible(true)]
         public void Message(string message, bool isHeld = false, bool isNoisy = true, bool isSubtitles = false)
         {
-           Cassie.Message(message, isHeld, isNoisy, isSubtitles);
+            Cassie.Message(message, isHeld, isNoisy, isSubtitles);
         }
 
         [MoonSharpVisible(true)]

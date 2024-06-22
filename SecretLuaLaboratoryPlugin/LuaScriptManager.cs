@@ -34,10 +34,29 @@ namespace LuaLab
             {
                 script.DoString(code);
             }
+            catch (InterpreterException ex)
+            {
+                Log.Error(ex.Message, $"Lua Interpreter Error ({executor.nicknameSync.DisplayName})");
+
+                if (executor == ReferenceHub.HostHub)
+                {
+                    Log.Error($"[Lua Error] {ex}");
+                }
+                else
+                {
+                    executor.queryProcessor._sender.RaReply(ex.DecoratedMessage, true, true, "Lua Error");
+                }
+            }
             catch (Exception ex)
             {
-                Log.Error(ex.Message, $"Lua Error ({executor.nicknameSync.DisplayName})");
-                executor.queryProcessor._sender.RaReply(ex.Message, true, true, "Lua Error");
+                if (executor == ReferenceHub.HostHub)
+                {
+                    Log.Error($"[Lua Hard Error] {ex}");
+                }
+                else
+                {
+                    executor.queryProcessor._sender.RaReply(ex.Message, true, true, "Lua Hard Error");
+                }
             }
         }
 
@@ -47,7 +66,7 @@ namespace LuaLab
             if (pluginObject != null)
             {
                 pluginObject.Script = script;
-                script.Globals["plugin"] = pluginObject;
+                script.Globals["Plugin"] = pluginObject;
             }
 
             //Global handlers
