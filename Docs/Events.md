@@ -1,8 +1,25 @@
 # Events
 
 Event handlers are stored inside of a `Events` global variable, they are all its property.<br>
+You can subscribe to them by using `:add(function)`, and unsubscribe by `:remove(function)`.
+If you are using hot or live reload then EVERY subscribes event is automatically unsubscribed on reload.
+
+Every event has a single argument, which is a object containing all information about the event.
+
+Code example:
+```lua
+function playerJoined(args) -- single args object containing all event properties
+    LastPlayerJoined = args.Player
+    print("Welcome " .. args.Player.Username)
+end
+
+Events.PlayerJoined:add(playerJoined); -- registering the event
+```
 
 
+Some events can be cancelled. This can be done by returning false. For example GrenadeExploded
+
+These are the events that are currently available in format EventName - Objects that are inside of args param
 `PlayerJoined` - `Player` <br>
 `PlayerLeft` - `Player` <br>
 `PlayerDying` - `Player` `Attacker` `DamageHandler` <br>
