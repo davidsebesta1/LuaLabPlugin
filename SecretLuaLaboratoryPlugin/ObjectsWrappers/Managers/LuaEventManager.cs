@@ -2,10 +2,14 @@
 using LuaLab.ObjectsWrappers.Events;
 using MoonSharp.Interpreter;
 using PluginAPI.Core;
+using PluginAPI.Core.Attributes;
 using PluginAPI.Enums;
 using PluginAPI.Events;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 
 namespace LuaLab.ObjectsWrappers.Managers
 {
@@ -23,6 +27,7 @@ namespace LuaLab.ObjectsWrappers.Managers
             {
                 Log.Raw($"<color=Blue>[LuaLab] Initializing lua events...</color>");
                 int registered = 0;
+
                 foreach (ServerEventType type in allTypes)
                 {
                     try
@@ -64,7 +69,7 @@ namespace LuaLab.ObjectsWrappers.Managers
 
     public static class EventManagerPatch
     {
-        [HarmonyPrefix]
+        [HarmonyPostfix]
         public static void Postfix(ref IEventArguments args, ref bool __result)
         {
             if (Plugin.Instance.LuaEventManager.Events.TryGetValue(args.BaseType, out ILuaEvent luaEvent))

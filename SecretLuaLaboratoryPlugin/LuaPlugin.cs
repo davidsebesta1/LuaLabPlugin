@@ -53,13 +53,9 @@ namespace LuaLab
             bool loadSuccess = false;
             try
             {
-                Log.Info("a");
                 Script script = Plugin.Instance.LuaScriptManager.CreateScript(ReferenceHub.HostHub, LuaOutputType.ServerConsole, this);
-                Log.Info("b");
                 Plugin.Instance.LuaPluginManager.PluginGlobalTableInsert(this, script);
-                Log.Info("c");
                 loadSuccess = Plugin.Instance.LuaPluginManager.RunScriptCodeFromPath(script, PluginPath);
-                Log.Info("d");
                 PluginLoaded?.Invoke(null);
             }
             catch (Exception e)
@@ -97,6 +93,7 @@ namespace LuaLab
         [MoonSharpVisible(true)]
         public bool HotReload()
         {
+            Log.Info($"Hot Reloading {Name}");
             bool res = false;
             try
             {
@@ -111,12 +108,15 @@ namespace LuaLab
             {
                 Log.Raw($"<color=Red>[LuaLab] Error at reloading {Name}: {e}</color>");
             }
+
+            Log.Info($"Hot Reloaded {Name}");
             return res;
         }
 
         [MoonSharpVisible(true)]
         public bool LiveReload()
         {
+            Log.Info($"Live Reloading {Name}");
             bool res = false;
             try
             {
@@ -133,6 +133,8 @@ namespace LuaLab
             {
                 Log.Raw($"<color=Red>[LuaLab] Error at reloading {Name}: {e}</color>");
             }
+
+            Log.Info($"Live Reloaded {Name}");
             return res;
         }
 
