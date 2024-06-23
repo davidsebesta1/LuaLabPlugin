@@ -1,11 +1,13 @@
 # Events
 
-Event handlers are stored inside of a `Events` global variable, they are all its property.<br>
-You can subscribe to them by using `:add(function)`, and unsubscribe by `:remove(function)`.
-If you are using hot or live reload then EVERY subscribes event is automatically unsubscribed on reload.
+## About Events
+Event handlers are stored inside of a `Events` global variable, each event is a property of this object.<br>
 
-Every event has a single argument, which is a object containing all information about the event.
+## Subscription
+You can subscribe to them by using `:add(function)`, and unsubscribe by `:remove(function)`.<br>
+If you are using hot or live reload then EVERY subscribes event is automatically unsubscribed on reload.<br>
 
+Every event has a single argument, which is a object containing all information about the event.<br>
 Code example:
 ```lua
 function playerJoined(args) -- single args object containing all event properties
@@ -16,10 +18,32 @@ end
 Events.PlayerJoined:add(playerJoined); -- registering the event
 ```
 
+## Event Cancellation
+Some events can be cancelled, this is done by returning false.
+```lua
+function onGrenadeExploding(args)
 
-Some events can be cancelled. This can be done by returning false. For example GrenadeExploded
+    if(args.
+    return false
+end
 
-These are the events that are currently available in format EventName - Objects that are inside of args param
+Events.GrenadeExploded.add(onGrenadeExploding)
+```
+
+> [!WARNING]
+> Not specifing the return value will always evaluate to false, please specify return to **true** if you do not want to cancel it
+
+```lua
+function onGrenadeExploding(args) -- grenade wont cause any damage as it doesnt return true - therefore its cancelled
+    print("kaboom")
+end
+
+Events.GrenadeExploded.add(onGrenadeExploding)
+```
+
+<br><br>
+## Available Events
+These are the events that are currently available in format EventName - Objects that are inside of args param<br>
 `PlayerJoined` - `Player` <br>
 `PlayerLeft` - `Player` <br>
 `PlayerDying` - `Player` `Attacker` `DamageHandler` <br>
