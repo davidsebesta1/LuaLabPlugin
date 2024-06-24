@@ -91,6 +91,7 @@
     <Compile Include="ObjectsWrappers\DamageHandlers\LuaStandardDamageHandler.cs" />
     <Compile Include="ObjectsWrappers\Events\ILuaEvent.cs" />
     <Compile Include="ObjectsWrappers\Events\LuaEvent.cs" />
+    <Compile Include="ObjectsWrappers\Facility\DoorType.cs" />
     <Compile Include="ObjectsWrappers\Facility\LuaCassie.cs" />
     <Compile Include="ObjectsWrappers\Facility\LuaDoor.cs" />
     <Compile Include="ObjectsWrappers\Items\LuaFirearmItem.cs" />

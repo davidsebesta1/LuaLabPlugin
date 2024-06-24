@@ -14,7 +14,7 @@ namespace LuaLab.ObjectsWrappers.Facility
         private readonly FacilityZone _zone;
 
         [MoonSharpHidden]
-        private readonly RoomIdentifier[] _rooms;
+        private RoomIdentifier[] _rooms;
 
         public LuaFacilityZone(FacilityZone zone)
         {
@@ -28,6 +28,15 @@ namespace LuaLab.ObjectsWrappers.Facility
             get
             {
                 return _zone.ZoneType;
+            }
+        }
+
+        [MoonSharpVisible(true)]
+        public RoomIdentifier[] Rooms
+        {
+            get
+            {
+                return _rooms.ToArray();
             }
         }
 

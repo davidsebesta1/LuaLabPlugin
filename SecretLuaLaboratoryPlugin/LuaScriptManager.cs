@@ -4,6 +4,7 @@ using InventorySystem.Items.Firearms;
 using InventorySystem.Items.Firearms.Ammo;
 using InventorySystem.Items.Pickups;
 using LuaLab.Helpers;
+using LuaLab.ObjectsWrappers.Facility;
 using MapGeneration;
 using MoonSharp.Interpreter;
 using PlayerRoles;
@@ -91,6 +92,7 @@ namespace LuaLab
             script.Globals["KeycardPermissions"] = UserData.CreateStatic<KeycardPermissions>();
             script.Globals["FirearmStatusFlags"] = UserData.CreateStatic<FirearmStatusFlags>();
             script.Globals["Team"] = UserData.CreateStatic<Team>();
+            script.Globals["DoorType"] = UserData.CreateStatic<DoorType>();
 
             //Global functions
 

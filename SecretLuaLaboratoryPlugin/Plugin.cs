@@ -134,6 +134,7 @@ namespace LuaLab
             UserData.RegisterType<FacilityZone>();
             UserData.RegisterProxyType<LuaFacilityRoom, RoomIdentifier>(room => new LuaFacilityRoom(room));
             UserData.RegisterProxyType<LuaFacilityZone, PluginAPI.Core.Zones.FacilityZone>(room => new LuaFacilityZone(room));
+            UserData.RegisterType<DoorType>();
 
             //Doors
             UserData.RegisterProxyType<LuaDoor, FacilityDoor>(room => new LuaDoor(room));

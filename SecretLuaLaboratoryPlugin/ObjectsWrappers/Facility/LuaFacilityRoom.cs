@@ -14,14 +14,23 @@ namespace LuaLab.ObjectsWrappers.Facility
         [MoonSharpHidden]
         private readonly RoomIdentifier _roomIdentifier;
 
-        [MoonSharpVisible(true)]
-        public FacilityDoor[] Doors { get; private set; }
+        [MoonSharpHidden]
+        private readonly FacilityDoor[] _doors;
 
         public LuaFacilityRoom(RoomIdentifier roomIdentifier)
         {
             _roomIdentifier = roomIdentifier;
 
-            Doors = PluginAPI.Core.Facility.Doors.Where(n => n.Room.Identifier == _roomIdentifier).ToArray();
+            _doors = PluginAPI.Core.Facility.Doors.Where(n => n.Room.Identifier == _roomIdentifier).ToArray();
+        }
+
+        [MoonSharpVisible(true)]
+        public FacilityDoor[] Doors
+        {
+            get
+            {
+                return _doors.ToArray();
+            }
         }
 
         [MoonSharpVisible(true)]
