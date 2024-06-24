@@ -5,7 +5,6 @@ using InventorySystem.Items;
 using InventorySystem.Items.Firearms;
 using InventorySystem.Items.Firearms.Ammo;
 using InventorySystem.Items.Pickups;
-using InventorySystem.Items.ThrowableProjectiles;
 using LuaLab.Helpers.Descriptors;
 using LuaLab.ObjectsWrappers.Effects;
 using LuaLab.ObjectsWrappers.Facility;
@@ -20,10 +19,8 @@ using PluginAPI.Core.Doors;
 using PluginAPI.Enums;
 using PluginAPI.Events;
 using System;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using Utils;
 using static CustomPlayerEffects.StatusEffectBase;
 
 namespace LuaLab
@@ -156,4 +153,4 @@ namespace LuaLab
             UserData.RegisterProxyType<LuaFirearmPickup, FirearmPickup>(ammoPickup => new LuaFirearmPickup(ammoPickup));
         }
     }
-}
+

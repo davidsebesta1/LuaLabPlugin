@@ -1,4 +1,5 @@
-﻿using Interactables.Interobjects.DoorUtils;
+﻿using Footprinting;
+using Interactables.Interobjects.DoorUtils;
 using InventorySystem.Items.Firearms;
 using InventorySystem.Items.Firearms.Ammo;
 using InventorySystem.Items.Pickups;
@@ -145,6 +146,14 @@ namespace LuaLab
                 DynValue g = DynValue.NewNumber(color.g);
                 DynValue b = DynValue.NewNumber(color.b);
                 DynValue dynVal = DynValue.NewTable(script, [r, g, b]);
+                return dynVal;
+            });
+
+            //Footprint
+            Script.GlobalOptions.CustomConverters.SetClrToScriptCustomConversion<Footprint>(
+            (script, footprint) =>
+            {
+                DynValue dynVal = DynValue.FromObject(script, Player.Get(footprint.Hub));
                 return dynVal;
             });
 

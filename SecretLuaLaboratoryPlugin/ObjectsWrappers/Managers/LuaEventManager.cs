@@ -72,12 +72,19 @@ namespace LuaLab.ObjectsWrappers.Managers
         [HarmonyPostfix]
         public static void Postfix(ref IEventArguments args, ref bool __result)
         {
-            if (Plugin.Instance.LuaEventManager.Events.TryGetValue(args.BaseType, out ILuaEvent luaEvent))
+            try
             {
-                if (!luaEvent.Invoke(args))
+                if (Plugin.Instance.LuaEventManager.Events.TryGetValue(args.BaseType, out ILuaEvent luaEvent))
                 {
-                    __result = false;
+                    if (!luaEvent.Invoke(args))
+                    {
+                        __result = false;
+                    }
                 }
+            }
+            catch (InterpreterException ex)
+            {
+                Log.Raw($"<color=Red>[Lua Error] {ex.DecoratedMessage}</color>");
             }
         }
     }
