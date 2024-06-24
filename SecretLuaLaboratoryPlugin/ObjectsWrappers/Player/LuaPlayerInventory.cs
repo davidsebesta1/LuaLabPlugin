@@ -37,6 +37,16 @@ namespace SecretLuaLaboratoryPlugin.Objects.Player
         }
 
         [MoonSharpVisible(true)]
+        public ItemBase[] AllItems
+        {
+            get
+            {
+                return _luaPlayer.Hub.inventory.UserInventory.Items.Values.ToArray();
+            }
+        }
+
+
+        [MoonSharpVisible(true)]
         public ItemBase GiveItem(ItemType type)
         {
             ItemBase item = _luaPlayer.Hub.inventory.ServerAddItem(type);
@@ -49,10 +59,28 @@ namespace SecretLuaLaboratoryPlugin.Objects.Player
         }
 
         [MoonSharpVisible(true)]
+        public ItemBase GetItem(int index)
+        {
+            return _luaPlayer.Hub.inventory.UserInventory.Items.ElementAtOrDefault(index).Value;
+        }
+
+        [MoonSharpVisible(true)]
+        public ItemBase[] GetItems(ItemType type)
+        {
+            return _luaPlayer.Hub.inventory.UserInventory.Items.Values.Where(n => n.ItemTypeId == type).ToArray();
+        }
+
+        [MoonSharpVisible(true)]
         public void RemoveItem(ItemType type)
         {
             ItemBase item = _luaPlayer.Hub.inventory.UserInventory.Items.FirstOrDefault(x => x.Value.ItemTypeId == type).Value;
 
+            RemoveItem(item);
+        }
+
+        [MoonSharpVisible(true)]
+        public void RemoveItem(ItemBase item)
+        {
             if (item != null)
             {
                 _luaPlayer.Hub.inventory.ServerRemoveItem(item.ItemSerial, item.PickupDropModel);
@@ -72,6 +100,17 @@ namespace SecretLuaLaboratoryPlugin.Objects.Player
         }
 
         [MoonSharpVisible(true)]
+        public ItemPickupBase DropItem(ItemBase item)
+        {
+            if (item != null)
+            {
+                return _luaPlayer.Hub.inventory.ServerDropItem(item.ItemSerial);
+            }
+
+            return null;
+        }
+
+        [MoonSharpVisible(true)]
         public void GiveAmmo(ItemType type, int amount)
         {
             _luaPlayer.Hub.inventory.ServerAddAmmo(type, amount);
@@ -81,6 +120,12 @@ namespace SecretLuaLaboratoryPlugin.Objects.Player
         public void SetAmmo(ItemType type, int amount)
         {
             _luaPlayer.Hub.inventory.ServerSetAmmo(type, amount);
+        }
+
+        [MoonSharpVisible(true)]
+        public ushort GetAmmo(ItemType ammo)
+        {
+            return _luaPlayer.Hub.inventory.GetCurAmmo(ammo);
         }
 
         [MoonSharpVisible(true)]

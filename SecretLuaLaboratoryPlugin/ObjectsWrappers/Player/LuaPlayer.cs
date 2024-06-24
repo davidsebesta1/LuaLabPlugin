@@ -7,6 +7,7 @@ using PluginAPI.Core;
 using SecretLuaLaboratoryPlugin.ObjectsWrappers.Player;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using VoiceChat;
 using static Broadcast;
 
@@ -91,20 +92,49 @@ namespace SecretLuaLaboratoryPlugin.Objects.Player
         }
 
         [MoonSharpVisible(true)]
+        public float Health
+        {
+            get
+            {
+                return Hub.playerStats.GetModule<HealthStat>().CurValue;
+            }
+            set
+            {
+                Hub.playerStats.GetModule<HealthStat>().CurValue = value;
+            }
+        }
+
+        [MoonSharpVisible(true)]
+        public float Shield
+        {
+            get
+            {
+                if(Hub.roleManager.CurrentRole.Team == PlayerRoles.Team.SCPs)
+                {
+                    return Hub.playerStats.GetModule<HumeShieldStat>().CurValue;
+                }
+
+                return Hub.playerStats.GetModule<AhpStat>().CurValue;
+            }
+
+            set
+            {
+                if (Hub.roleManager.CurrentRole.Team == PlayerRoles.Team.SCPs)
+                {
+                    Hub.playerStats.GetModule<HumeShieldStat>().CurValue= value;
+                    return;
+                }
+
+                Hub.playerStats.GetModule<AhpStat>().CurValue = value;
+            }
+        }
+
+        [MoonSharpVisible(true)]
         public int PlayerId
         {
             get
             {
                 return Hub.PlayerId;
-            }
-        }
-
-        [MoonSharpVisible(true)]
-        public FacilityZone CurrentZoneType
-        {
-            get
-            {
-                return RoomIdUtils.RoomAtPosition(Hub.gameObject.transform.position).Zone;
             }
         }
 
@@ -149,6 +179,33 @@ namespace SecretLuaLaboratoryPlugin.Objects.Player
             set
             {
                 VoiceChatMutes.IssueLocalMute(UserId, intercom: true);
+            }
+        }
+
+        [MoonSharpVisible(true)]
+        public Vector3 Position
+        {
+            get
+            {
+                return Hub.gameObject.transform.position;
+            }
+            set
+            {
+                Hub.gameObject.transform.position = value;
+            }
+        }
+
+        [MoonSharpVisible(true)]
+        public float Rotation
+        {
+            get
+            {
+                return Hub.transform.rotation.eulerAngles.y;
+            }
+            set
+            {
+                Vector3 euler = Hub.transform.rotation.eulerAngles;
+                Hub.transform.rotation = Quaternion.Euler(euler.x, value, euler.z);
             }
         }
 

@@ -22,8 +22,6 @@ Events.PlayerJoined:add(playerJoined); -- registering the event
 Some events can be cancelled, this is done by returning false.
 ```lua
 function onGrenadeExploding(args)
-
-    if(args.
     return false
 end
 

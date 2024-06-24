@@ -32,7 +32,7 @@ namespace LuaLab.ObjectsWrappers.Facility
         }
 
         [MoonSharpVisible(true)]
-        public void ZoneFlickerLights(float duration)
+        public void FlickerLights(float duration)
         {
             foreach (RoomIdentifier room in _rooms)
             {
