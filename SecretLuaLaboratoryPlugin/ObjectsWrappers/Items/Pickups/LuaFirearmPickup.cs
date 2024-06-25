@@ -28,7 +28,7 @@ namespace LuaLab.ObjectsWrappers.Items.Pickups
         }
 
         [MoonSharpVisible(true)]
-        public FirearmStatusFlags FirearmStatusFlags
+        public FirearmStatusFlags StatusFlags
         {
             get
             {

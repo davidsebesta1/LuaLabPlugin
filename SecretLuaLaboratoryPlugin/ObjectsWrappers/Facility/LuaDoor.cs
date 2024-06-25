@@ -2,6 +2,7 @@
 using Interactables.Interobjects.DoorUtils;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
+using PlayerStatsSystem;
 using PluginAPI.Core.Doors;
 
 namespace LuaLab.ObjectsWrappers.Facility
@@ -23,11 +24,14 @@ namespace LuaLab.ObjectsWrappers.Facility
                 case PryableDoor pryableDoor:
                     _doorType = DoorType.Gate;
                     break;
-                case BasicDoor door:
+                case BreakableDoor door:
                     _doorType = DoorType.Standard;
                     break;
                 case CheckpointDoor checkpointDoor:
                     _doorType = DoorType.Checkpoint;
+                    break;
+                default:
+                    _doorType = DoorType.Standard;
                     break;
             }
         }
@@ -90,6 +94,15 @@ namespace LuaLab.ObjectsWrappers.Facility
             set
             {
                 _facilityDoor.Permissions = value;
+            }
+        }
+
+        [MoonSharpVisible(true)]
+        public void Explode()
+        {
+            if (_facilityDoor.GetType().IsAssignableFrom(typeof(BreakableDoor)))
+            {
+                ((BreakableDoor)_facilityDoor.OriginalObject).ServerDamage(float.MaxValue, DoorDamageType.ServerCommand);
             }
         }
     }

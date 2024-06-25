@@ -9,6 +9,9 @@ Object representing a door and its status
 `LockReason` - Enum of type `DoorLockReason` having the reason for why the door is locked (RA, 079.. etc)<br>
 `Permissions` - Enum flag type of `KeycardPermissions` containing value of which keycard permissions can open this door (Its flag system, use &, | operator for setting it)<br>
 
+## Functions
+`Explode()` - Will cause door to explode... if possible. Doesnt do anything to gates or unbreakable doors
+
 Code Examples:
 
 ```lua

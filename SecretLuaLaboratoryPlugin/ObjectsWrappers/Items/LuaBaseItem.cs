@@ -1,6 +1,9 @@
-﻿using InventorySystem.Items;
+﻿using InventorySystem;
+using InventorySystem.Items;
+using InventorySystem.Items.Pickups;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
+using PluginAPI.Events;
 using SecretLuaLaboratoryPlugin.Objects.Player;
 using System;
 using System.Collections.Generic;
@@ -60,10 +63,12 @@ namespace LuaLab.ObjectsWrappers.Items
             {
                 return Plugin.Instance.LuaPlayerManager[_itemBase.Owner];
             }
-            set
-            {
-                _itemBase.Owner = value.Hub;
-            }
+        }
+
+        [MoonSharpVisible(true)]
+        public ItemPickupBase Drop()
+        {
+            return _itemBase.ServerDropItem();
         }
 
         public override bool Equals(object obj)
