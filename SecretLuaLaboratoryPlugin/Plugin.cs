@@ -5,7 +5,9 @@ using InventorySystem.Items;
 using InventorySystem.Items.Firearms;
 using InventorySystem.Items.Firearms.Ammo;
 using InventorySystem.Items.Pickups;
+using InventorySystem.Items.ThrowableProjectiles;
 using LuaLab.Helpers.Descriptors;
+using LuaLab.ObjectsWrappers.DamageHandlers;
 using LuaLab.ObjectsWrappers.Effects;
 using LuaLab.ObjectsWrappers.Facility;
 using LuaLab.ObjectsWrappers.Items;
@@ -14,6 +16,7 @@ using LuaLab.ObjectsWrappers.Managers;
 using MapGeneration;
 using MoonSharp.Interpreter;
 using PlayerRoles;
+using PlayerStatsSystem;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Core.Doors;
 using PluginAPI.Enums;
@@ -135,6 +138,7 @@ namespace LuaLab
             UserData.RegisterProxyType<LuaFacilityRoom, RoomIdentifier>(room => new LuaFacilityRoom(room));
             UserData.RegisterProxyType<LuaFacilityZone, PluginAPI.Core.Zones.FacilityZone>(room => new LuaFacilityZone(room));
             UserData.RegisterType<DoorType>();
+            UserData.RegisterProxyType<LuaTeslaGate, TeslaGate>(pickup => new LuaTeslaGate(pickup));
 
             //Doors
             UserData.RegisterProxyType<LuaDoor, FacilityDoor>(room => new LuaDoor(room));
@@ -149,10 +153,13 @@ namespace LuaLab
             UserData.RegisterProxyType<LuaFirearmItem, Firearm>(firearm => new LuaFirearmItem(firearm));
 
             //Pickups
-            UserData.RegisterProxyType<LuaItemPickup, ItemPickupBase>(pickup => new LuaItemPickup(pickup));
+            UserData.RegisterProxyType<LuaExplosivePickup, TimedGrenadePickup>(grenadePickup => new LuaExplosivePickup(grenadePickup));
             UserData.RegisterProxyType<LuaAmmoItemPickup, AmmoPickup>(ammoPickup => new LuaAmmoItemPickup(ammoPickup));
-            UserData.RegisterProxyType<LuaFirearmPickup, FirearmPickup>(ammoPickup => new LuaFirearmPickup(ammoPickup));
+            UserData.RegisterProxyType<LuaFirearmPickup, FirearmPickup>(firearmPickup => new LuaFirearmPickup(firearmPickup));
+            UserData.RegisterProxyType<LuaItemPickup, ItemPickupBase>(pickup => new LuaItemPickup(pickup));
+
+            //Damage handler(s)
+            UserData.RegisterProxyType<LuaStandardDamageHandler, StandardDamageHandler>(pickup => new LuaStandardDamageHandler(pickup));
         }
     }
-
 }

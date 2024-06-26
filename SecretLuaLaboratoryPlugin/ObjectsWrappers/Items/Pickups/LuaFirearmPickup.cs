@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace LuaLab.ObjectsWrappers.Items.Pickups
 {
-    public class LuaFirearmPickup : LuaItemPickup, IEquatable<LuaFirearmPickup>
+    public class LuaFirearmPickup : LuaBaseItemPickup, IEquatable<LuaFirearmPickup>
     {
         public LuaFirearmPickup(ItemPickupBase itemPickupBase) : base(itemPickupBase)
         {

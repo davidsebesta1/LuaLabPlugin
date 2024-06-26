@@ -1,4 +1,5 @@
 ﻿using Hints;
+using InventorySystem.Items.Firearms.Modules;
 using MapGeneration;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
@@ -109,7 +110,7 @@ namespace SecretLuaLaboratoryPlugin.Objects.Player
         {
             get
             {
-                if(Hub.roleManager.CurrentRole.Team == PlayerRoles.Team.SCPs)
+                if (Hub.roleManager.CurrentRole.Team == PlayerRoles.Team.SCPs)
                 {
                     return Hub.playerStats.GetModule<HumeShieldStat>().CurValue;
                 }
@@ -121,7 +122,7 @@ namespace SecretLuaLaboratoryPlugin.Objects.Player
             {
                 if (Hub.roleManager.CurrentRole.Team == PlayerRoles.Team.SCPs)
                 {
-                    Hub.playerStats.GetModule<HumeShieldStat>().CurValue= value;
+                    Hub.playerStats.GetModule<HumeShieldStat>().CurValue = value;
                     return;
                 }
 
@@ -206,6 +207,16 @@ namespace SecretLuaLaboratoryPlugin.Objects.Player
             {
                 Vector3 euler = Hub.transform.rotation.eulerAngles;
                 Hub.transform.rotation = Quaternion.Euler(euler.x, value, euler.z);
+            }
+        }
+
+        [MoonSharpVisible(true)]
+        public Vector3 AimingPoint
+        {
+            get
+            {
+                Physics.Raycast(new Ray(Hub.PlayerCameraReference.position, Hub.PlayerCameraReference.forward), out RaycastHit hit, 1000f, StandardHitregBase.HitregMask);
+                return hit.point;
             }
         }
 

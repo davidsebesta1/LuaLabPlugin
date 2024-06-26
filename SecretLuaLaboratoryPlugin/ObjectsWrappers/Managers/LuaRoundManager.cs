@@ -78,7 +78,7 @@ namespace LuaLab.ObjectsWrappers.Managers
         }
 
         [MoonSharpVisible(true)]
-        public void Restart(bool fast)
+        public void Restart(bool fast = false)
         {
             Round.Restart(fast);
         }

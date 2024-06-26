@@ -173,6 +173,20 @@ namespace LuaLab
                     break;
             }
 
+            //Float
+            Script.GlobalOptions.CustomConverters.SetScriptToClrCustomConversion(DataType.Number, typeof(float),
+            dynVal =>
+            {
+                return dynVal.Number;
+            });
+
+            //Float
+            Script.GlobalOptions.CustomConverters.SetScriptToClrCustomConversion(DataType.Boolean, typeof(bool),
+            dynVal =>
+            {
+                return dynVal.Boolean;
+            });
+
             return script;
         }
     }

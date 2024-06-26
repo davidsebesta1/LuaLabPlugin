@@ -14,6 +14,15 @@ namespace SecretLuaLaboratoryPlugin.ObjectsWrappers.Managers
         }
 
         [MoonSharpVisible(true)]
+        public TeslaGate[] TeslaGates
+        {
+            get
+            {
+                return TeslaGateController.Singleton.TeslaGates.ToArray();
+            }
+        }
+
+        [MoonSharpVisible(true)]
         public void TurnOffAllLights()
         {
             PluginAPI.Core.Facility.TurnOffAllLights();
@@ -42,5 +51,6 @@ namespace SecretLuaLaboratoryPlugin.ObjectsWrappers.Managers
                 return PluginAPI.Core.Facility.Rooms.FirstOrDefault(n => n.Identifier.Name == roomName).Identifier;
             }
         }
+
     }
 }

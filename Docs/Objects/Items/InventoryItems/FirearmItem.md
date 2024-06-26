@@ -13,7 +13,6 @@ A inherited class from [BaseItem](link) to access properties of a firearm.
 `AmmoType` - Readonly value of Enum of type `ItemType`.<br>
 `FirearmStatusFlags` - Flags enum of the type `FirearmStatusFlags`<br>
 `Attachments` - Whole number value of the attachments code.<br>
-`AimingPoint` - A Vector3 position where the player is aiming. Returns 0 length vector (0,0,0) if the player is currently not holding this firearm.<br>
 
 > [!IMPORTANT]
 > For setting it I suggest just printing the value in game and copying it. I havent got a single clue how the fuck this system works.

@@ -2,7 +2,6 @@
 using Interactables.Interobjects.DoorUtils;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
-using PlayerStatsSystem;
 using PluginAPI.Core.Doors;
 
 namespace LuaLab.ObjectsWrappers.Facility

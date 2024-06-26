@@ -27,6 +27,7 @@ An object represnting player. Allows developer to access and modify player prope
 
 `Position` - Vector3 of player´s position<br>
 `Rotation` - Y rotation (horizontal) rotation of player<br>
+`AimingPoint` - A Vector3 position where the player is aiming.<br>
 
 ## Functions
 `Kick(reason)` - Kicks the player<br>
@@ -57,4 +58,9 @@ Players["YourPlayer"].Position = Players["AnotherPlayer"].Position
 ```lua
 Players["YourPlayer"].CurrentRoom.LightsEnabled = false
 --Disables the lights in YourPlayer´s room
+```
+
+```lua
+Players["YourPlayer"].Position = Players["YourPlayer"].AimingPoint
+--Teleports the player to position he is currently looking at
 ```

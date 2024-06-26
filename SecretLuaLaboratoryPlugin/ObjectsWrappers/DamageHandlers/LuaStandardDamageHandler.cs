@@ -9,7 +9,7 @@ namespace LuaLab.ObjectsWrappers.DamageHandlers
         [MoonSharpHidden]
         private readonly StandardDamageHandler _originalDamageHandler;
 
-        private LuaStandardDamageHandler(StandardDamageHandler handler)
+        public LuaStandardDamageHandler(StandardDamageHandler handler)
         {
             _originalDamageHandler = handler;
         }

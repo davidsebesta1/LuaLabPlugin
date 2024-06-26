@@ -20,7 +20,7 @@ Code Examples:
 ```lua
 function onPlayerDied(args) 
     if #Players.AllPlayers < 2 then
-        Round:Restart() -- not specifying the fast restart value is defaulted to false
+        Round:restart() -- not specifying the fast restart value is defaulted to false
     end
 end
 

@@ -5,7 +5,6 @@ using InventorySystem.Items.Firearms.Modules;
 using MoonSharp.Interpreter.Interop;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace LuaLab.ObjectsWrappers.Items
 {
@@ -100,23 +99,8 @@ namespace LuaLab.ObjectsWrappers.Items
             set
             {
                 Firearm firearm = ((Firearm)_itemBase);
-                //firearm.Status = new FirearmStatus(firearm.Status.Ammo, firearm.Status.Flags, value);
+                firearm.Status = new FirearmStatus(firearm.Status.Ammo, firearm.Status.Flags, value);
                 firearm.ApplyAttachmentsCode(value, true);
-            }
-        }
-
-        [MoonSharpVisible(true)]
-        public Vector3 AimingPoint
-        {
-            get
-            {
-                if (_itemBase.IsEquipped)
-                {
-                    return Vector3.zero;
-                }
-
-                Physics.Raycast(new Ray(_itemBase.Owner.PlayerCameraReference.position, _itemBase.Owner.PlayerCameraReference.forward), out RaycastHit hit, 1000f, StandardHitregBase.HitregMask);
-                return hit.point;
             }
         }
 

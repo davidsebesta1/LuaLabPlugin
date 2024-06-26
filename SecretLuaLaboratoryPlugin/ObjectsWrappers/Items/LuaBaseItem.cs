@@ -1,9 +1,7 @@
-﻿using InventorySystem;
-using InventorySystem.Items;
+﻿using InventorySystem.Items;
 using InventorySystem.Items.Pickups;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
-using PluginAPI.Events;
 using SecretLuaLaboratoryPlugin.Objects.Player;
 using System;
 using System.Collections.Generic;

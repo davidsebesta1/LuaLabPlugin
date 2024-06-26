@@ -20,7 +20,7 @@ namespace LuaLab.Commands
             PlayerCommandSender cmdSender = sender as PlayerCommandSender;
 
             ReferenceHub hub = cmdSender?.ReferenceHub ?? ReferenceHub.HostHub;
-            if (Plugin.Instance.Config.AllowExecLuaInGame && (hub == ReferenceHub.HostHub || Plugin.Instance.Config.AllowedUserIds.Contains(hub.authManager.UserId)))
+            if (Plugin.Instance.Config.AllowExecLuaInGame && (hub == ReferenceHub.HostHub || (Plugin.Instance.Config.AllowedUserIds?.Contains(hub.authManager.UserId) ?? false)))
             {
                 string code = string.Join(" ", arguments);
                 Plugin.Instance.LuaScriptManager.ExecuteLuaInGame(hub, code, hub == ReferenceHub.HostHub ? LuaOutputType.ServerConsole : LuaOutputType.PlayerConsole);

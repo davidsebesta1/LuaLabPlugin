@@ -1,17 +1,16 @@
 ﻿using InventorySystem.Items.Firearms.Ammo;
 using InventorySystem.Items.Pickups;
-using InventorySystem.Items.ThrowableProjectiles;
 using MoonSharp.Interpreter.Interop;
 using System;
 using System.Collections.Generic;
 
 namespace LuaLab.ObjectsWrappers.Items.Pickups
 {
-    public class LuaAmmoItemPickup : LuaItemPickup, IEquatable<LuaAmmoItemPickup>
+    public class LuaAmmoItemPickup : LuaBaseItemPickup, IEquatable<LuaAmmoItemPickup>
     {
         public LuaAmmoItemPickup(ItemPickupBase itemPickupBase) : base(itemPickupBase)
         {
-           
+
         }
 
         [MoonSharpVisible(true)]
