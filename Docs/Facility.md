@@ -3,6 +3,9 @@
 ## About
 A global variable `Facility` represents the whole in game facility and allows scripters to access each Facility Zone, named Room and all lights.
 
+## Properties
+`TeslaGates` - Returns a new array of all [TeslaGate](link) objects.
+
 ## Indexers
 `Facility` has two readonly indexers:
 1. For FacilityZone. Returning zone as a object
