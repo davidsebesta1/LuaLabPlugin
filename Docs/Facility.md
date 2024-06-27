@@ -30,8 +30,8 @@ Facility[RoomName.Lcz914].LightsColor = {1, 0, 0}
 ```
 
 ## Functions
-`TurnOffAllLight()` - Guess
-`TurnOnAllLights()` - Guess again
+`TurnOffAllLight()` - Turns off all lights inside of facility.<br>
+`TurnOnAllLights()` - Turns on all lights inside of facility.<br>
 
 Code Example:
 
