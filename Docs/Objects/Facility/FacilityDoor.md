@@ -6,8 +6,8 @@ Object representing a door and its status.
 ## Properties
 `IsOpened` - Bool value whenever the door is opened or not.<br>
 `IsLocked` - Bool value about door locked status.<br>
-`LockReason` - Enum of type `DoorLockReason` having the reason for why the door is locked (RA, 079.. etc).<br>
-`Permissions` - Enum flag type of `KeycardPermissions` containing value of which keycard permissions can open this door (Its flag system, use &, | operator for setting it).<br>
+`LockReason` - Enum of type [`DoorLockReason`](https://github.com/davidsebesta1/LuaLabPlugin/edit/master/Docs/Objects/Facility/FacilityDoor.md) having the reason for why the door is locked (RA, 079.. etc).<br>
+`Permissions` - Enum flag type of [`KeycardPermissions`](https://github.com/davidsebesta1/LuaLabPlugin/edit/master/Docs/Objects/Facility/FacilityDoor.md) containing value of which keycard permissions can open this door (Its flag system, use &, | operator for setting it).<br>
 
 ## Functions
 `Explode()` - Will cause door to explode... if possible. Doesnt do anything to gates or unbreakable doors.<br>
