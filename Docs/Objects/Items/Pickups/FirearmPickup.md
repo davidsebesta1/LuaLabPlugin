@@ -1,15 +1,15 @@
 # Firearm Pickup
 
 ## About
-Inherited class from [ItemPickup](link). Allows you to modify firearm properties.
+Inherited class from [ItemPickup](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Items/Pickups/ItemPickup.md). Allows you to modify firearm properties.
 
 ## Properties
 `Ammo` - Whole number value of current ammo inside of magazine (255 max).<br>
-`StatusFlags` - Flags enum of type FirearmStatusFlags.<br>
+`StatusFlags` - Flags enum of type [`FirearmStatusFlags`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/FirearmStatusFlags.md).<br>
 `Attachments` - Whole number value of current attachments.<br>
 
 > [!IMPORTANT]
-> For setting it I suggest just printing the value in game and copying it. I havent got a single clue how the fuck this system works.
+> For setting it I suggest just printing the value in game and copying it. I dont know how exactly this system works.
 
 Code Examples:
 
