@@ -19,7 +19,7 @@ Code Examples
 
 function onChangeItem(args)
     for key,value in pairs(args.Player.Inventory.AllItems) do
-        if value.Serial == args.NewItem && value.ItemType == Itemtype.Medkit then
+        if value.Serial == args.NewItem and value.ItemType == ItemType.Medkit then
             value.Drop()
         end
     end
