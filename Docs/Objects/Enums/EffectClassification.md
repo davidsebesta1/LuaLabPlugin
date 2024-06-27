@@ -1,0 +1,5 @@
+```cs
+Negative
+Mixed
+Positive
+```

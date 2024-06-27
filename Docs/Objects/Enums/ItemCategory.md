@@ -1,0 +1,12 @@
+```cs
+None
+Keycard
+Medical
+Radio
+Firearm
+Grenade
+SCPItem
+MicroHID
+Ammo
+Armor
+``` 

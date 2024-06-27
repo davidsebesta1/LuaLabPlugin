@@ -1,0 +1,9 @@
+```cs
+SCPs
+FoundationForces
+ChaosInsurgency
+Scientists
+ClassD
+Dead
+OtherAlive
+```

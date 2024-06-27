@@ -11,7 +11,7 @@ A inherited class from [BaseItem](link) to access properties of a firearm.
 > Maximum ammo is somehow connected to the max ammo of the magazine and different values for different magazine sizes will produce different final results.
 
 `AmmoType` - Readonly value of Enum of type `ItemType`.<br>
-`FirearmStatusFlags` - Flags enum of the type `FirearmStatusFlags`<br>
+`FirearmStatusFlags` - Flags enum of the type `FirearmStatusFlags`.<br>
 `Attachments` - Whole number value of the attachments code.<br>
 
 > [!IMPORTANT]

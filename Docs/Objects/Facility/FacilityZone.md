@@ -5,7 +5,7 @@ Representation of a whole zone inside of the facility. Allows scripters to get i
 
 ## Properties
 `ZoneType` - Readonly enum FacilityZone value of this zone type.<br>
-`Rooms` - Returns a new array of all rooms inside of this facility zone<br>
+`Rooms` - Returns a new array of all rooms inside of this facility zone.<br>
 
 ## Functions
 `FlickerLights(duration)` - Shuts all lights inside of this zone for specified duration<br>

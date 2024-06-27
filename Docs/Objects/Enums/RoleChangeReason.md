@@ -1,0 +1,11 @@
+ ```cs
+None
+RoundStart
+LateJoin
+Respawn
+Died
+Escaped
+Revived
+RemoteAdmin
+Destroyed
+```
