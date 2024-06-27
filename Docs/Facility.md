@@ -4,12 +4,12 @@
 A global variable `Facility` represents the whole in game facility and allows scripters to access each Facility Zone, named Room and all lights.
 
 ## Properties
-`TeslaGates` - Returns a new array of all [TeslaGate](link) objects.<br>
-`Generators` - Returns a new array of all [Generators](link).<br>
+`TeslaGates` - Returns a new array of all [TeslaGate](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Facility/TeslaGate.md) objects.<br>
+`Generators` - Returns a new array of all [Generators](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Facility/Generator.md).<br>
 
 ## Indexers
 `Facility` has two readonly indexers:
-1. For FacilityZone. Returning zone as a object
+1. For [FacilityZone](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/FacilityZone.md) enum. Returning [zone](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Facility/FacilityZone.md) as a object
 
 Code Example:
 
@@ -19,7 +19,7 @@ Facility[FacilityZone.LightContainment]:FlickerLights(5)
 --Turns off all lights in LCZ for 5 seconds
 ```
 
-2. For Room. Returning a room object
+2. For [Room](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/RoomName.md). Returning a [room object](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Facility/FacilityRoom.md)
 
 Code Example:
 
