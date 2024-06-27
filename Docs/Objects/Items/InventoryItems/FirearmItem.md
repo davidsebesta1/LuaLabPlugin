@@ -1,7 +1,7 @@
 # Firearm Item
 
 ## About
-A inherited class from [BaseItem](link) to access properties of a firearm.
+A inherited class from [BaseItem](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Items/InventoryItems/BaseItem.md) to access properties of a firearm.
 
 ## Properties
 `Ammo` - Whole number value of the current ammo inside of magazine.<br>
@@ -10,8 +10,8 @@ A inherited class from [BaseItem](link) to access properties of a firearm.
 > [!NOTE]
 > Maximum ammo is somehow connected to the max ammo of the magazine and different values for different magazine sizes will produce different final results.
 
-`AmmoType` - Readonly value of Enum of type `ItemType`.<br>
-`FirearmStatusFlags` - Flags enum of the type `FirearmStatusFlags`.<br>
+`AmmoType` - Readonly value of Enum of type [`ItemType`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/ItemTypeId.md).<br>
+`FirearmStatusFlags` - Flags enum of the type [`FirearmStatusFlags`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/FirearrmStatusFlags.md).<br>
 `Attachments` - Whole number value of the attachments code.<br>
 
 > [!IMPORTANT]
