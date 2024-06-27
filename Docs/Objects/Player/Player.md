@@ -5,9 +5,9 @@ An object represnting player. Allows developer to access and modify player prope
 
 
 ## Properties
-`PlayerRole` - Readonly value providing access to player´s role modification<br>
-`Inventory` - Readonly value providing access to player´s inventory item addition/modification/removal<br>
-`Effects` - Readonly value providing access to player´s status effects<br>
+[`PlayerRole`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Player/PlayerRole.md) - Readonly value providing access to player´s role modification<br>
+[`Inventory`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Player/PlayerInventory.md) - Readonly value providing access to player´s inventory item addition/modification/removal<br>
+[`Effects`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Player/PlayerEffects.md) - Readonly value providing access to player´s status effects<br>
 `Username` - Readonly string containing username of player´s steam profile<br>
 `DisplayUsername` - Value of currently displaying nickname in game inside of player list<br>
 `IsOffline` - Readonly bool value whenever player has left<br>
