@@ -1,11 +1,11 @@
 # Status Effect
 
 ## About
-Status effect is a object representing a single SL Player Status Effect, list of all status effects can be found [here](url).
+Status effect is a object representing a single SL Player Status Effect, list of all status effects can be found [here](https://en.scpslgame.com/index.php?title=Status_Effects).
 
 ## Properties
 `EffectName` - A readonly text value containing in game name of this effect<br>
-`Classification` - Enum value about effect class (Positive/Mixed/Negative)<br>
+[`Classification`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/EffectClassification.md) - Enum value about effect class (Positive/Mixed/Negative)<br>
 `IsEnabled` - Bool value whenever effect is enabled. Enabling it sets intensity to 1 and duration to endless.<br>
 `Intensity` - A whole number value representing intensity of a effect. For their meanings check the url in About section.<br>
 `Duration` - Decimal number value for the duration of the effect.<br>¨
