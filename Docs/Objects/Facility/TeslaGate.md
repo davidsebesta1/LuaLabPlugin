@@ -13,5 +13,8 @@ An object representing a single tesla gate, allowing you to control it.
 Code Examples:
 
 ```lua
-
+--Instantly activates all tesla gates
+lua for _,value in pairs(Facility.TeslaGates) do v
+  value.InstantBurst()
+end
 ```
