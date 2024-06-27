@@ -22,6 +22,9 @@ A inherited class from [BaseItem](https://github.com/davidsebesta1/LuaLabPlugin/
 `TryStopReload()` - Attempts to stop reload by the player and returns boolean wabout success.<br>
 `TryUnload()` - Attempts to unload the gun as a player and return boolean about success.<br>
 
+> [!NOTE]
+> These functions are purely server side and doesnt force client side animations on the target weapon. Stopping functions will do cause clients to stop reloading if they started it.
+
 Code Examples:
 
 ```lua
