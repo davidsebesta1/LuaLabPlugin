@@ -1,7 +1,7 @@
 # Generator
 
 ## About
-An object representing generator to recontain SCP-079. All generator instances can be get by `Facility.Generators`
+An object representing generator to recontain SCP-079. All generator instances can be get by [`Facility.Generators`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Facility.md)
 
 ## Properties
 `ActivationReady` - Readonly bool about if the generator can be activated.<br>
