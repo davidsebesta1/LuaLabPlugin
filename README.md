@@ -1,6 +1,6 @@
 # Lua Lab Plugin
 
-SCP Secret Laboratory Plugin for writing and executing scripts in Lua using Moonsharp interpreter, allowing players to create their own plugins easier than never before
+SCP Secret Laboratory Plugin for writing and executing scripts in Lua using Moonsharp interpreter, allowing players to create their own plugins easier and without needing to setup Visual Studio or other IDE.
 
 ## Features
 ### Simple API to work with
