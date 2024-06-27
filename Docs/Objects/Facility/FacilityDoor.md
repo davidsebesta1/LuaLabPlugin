@@ -15,7 +15,7 @@ Object representing a door and its status.
 Code Examples:
 
 ```lua
-for key,value in pair(Facility[RoomName.Lcz914].Doors) do
+for key,value in pairs(Facility[RoomName.Lcz914].Doors) do
     value.IsOpened = false
 end
 
