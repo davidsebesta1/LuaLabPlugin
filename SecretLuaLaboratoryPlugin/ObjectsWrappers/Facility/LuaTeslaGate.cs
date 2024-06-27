@@ -1,4 +1,5 @@
-﻿using MoonSharp.Interpreter;
+﻿using MapGeneration;
+using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,15 @@ namespace LuaLab.ObjectsWrappers.Facility
         public LuaTeslaGate(TeslaGate tesla)
         {
             _tesla = tesla;
+        }
+
+        [MoonSharpVisible(true)]
+        public RoomIdentifier Room
+        {
+            get
+            {
+                return _tesla.Room;
+            }
         }
 
         [MoonSharpVisible(true)]

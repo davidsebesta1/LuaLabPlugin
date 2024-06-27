@@ -1,6 +1,10 @@
 ﻿using MapGeneration;
+using MapGeneration.Distributors;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
+using PlayerRoles.PlayableScps.Scp079;
+using PluginAPI.Core.Zones.Heavy;
+using PluginAPI.Roles;
 using System.Linq;
 
 namespace SecretLuaLaboratoryPlugin.ObjectsWrappers.Managers
@@ -19,6 +23,15 @@ namespace SecretLuaLaboratoryPlugin.ObjectsWrappers.Managers
             get
             {
                 return TeslaGateController.Singleton.TeslaGates.ToArray();
+            }
+        }
+
+        [MoonSharpVisible(true)]
+        public Scp079Generator[] Generators
+        {
+            get
+            {
+                return Scp079Recontainer.AllGenerators.ToArray();
             }
         }
 

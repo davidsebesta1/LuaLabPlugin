@@ -6,7 +6,6 @@ using Mirror;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
 using PluginAPI.Core;
-using PluginAPI.Core.Items;
 using SecretLuaLaboratoryPlugin.Objects.Player;
 using System;
 using System.Collections.Generic;

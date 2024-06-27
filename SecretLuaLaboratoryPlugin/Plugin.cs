@@ -14,8 +14,11 @@ using LuaLab.ObjectsWrappers.Items;
 using LuaLab.ObjectsWrappers.Items.Pickups;
 using LuaLab.ObjectsWrappers.Managers;
 using MapGeneration;
+using MapGeneration.Distributors;
 using MoonSharp.Interpreter;
 using PlayerRoles;
+using PlayerRoles.PlayableScps.Scp096;
+using PlayerRoles.Voice;
 using PlayerStatsSystem;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Core.Doors;
@@ -24,6 +27,7 @@ using PluginAPI.Events;
 using System;
 using System.Linq;
 using System.Reflection;
+using static BanHandler;
 using static CustomPlayerEffects.StatusEffectBase;
 
 namespace LuaLab
@@ -116,6 +120,9 @@ namespace LuaLab
             UserData.RegisterType<LuaEventManager>(new CustomUserDataDescriptor());
 
             UserData.RegisterType<Team>();
+            UserData.RegisterType<BanType>();
+            UserData.RegisterType<Scp096RageState>();
+            UserData.RegisterType<IntercomState>();
 
 
             //Roles and items
@@ -138,7 +145,8 @@ namespace LuaLab
             UserData.RegisterProxyType<LuaFacilityRoom, RoomIdentifier>(room => new LuaFacilityRoom(room));
             UserData.RegisterProxyType<LuaFacilityZone, PluginAPI.Core.Zones.FacilityZone>(room => new LuaFacilityZone(room));
             UserData.RegisterType<DoorType>();
-            UserData.RegisterProxyType<LuaTeslaGate, TeslaGate>(pickup => new LuaTeslaGate(pickup));
+            UserData.RegisterProxyType<LuaTeslaGate, TeslaGate>(teslaGate => new LuaTeslaGate(teslaGate));
+            UserData.RegisterProxyType<LuaGenerator, Scp079Generator>(generator => new LuaGenerator(generator));
 
             //Doors
             UserData.RegisterProxyType<LuaDoor, FacilityDoor>(room => new LuaDoor(room));
