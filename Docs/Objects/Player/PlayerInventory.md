@@ -1,7 +1,7 @@
 # Player Inventory
 
 ## About
-An object inside of `Player` for adding/modifying/deleting content from players inventory
+An object inside of [`Player`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Player/Player.md) for adding/modifying/deleting content from players inventory
 
 ## Properties
 `CurrentItem` - Item that is player currently holding *(nil if holding nothing)*<br>
