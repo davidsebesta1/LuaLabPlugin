@@ -12,7 +12,7 @@ namespace LuaLab.ObjectsWrappers.Events
     public class LuaEvent<T> : ILuaEvent where T : IEventArguments
     {
         [MoonSharpHidden]
-        private readonly List<Func<IEventArguments, bool>> _functions = new List<Func<IEventArguments, bool>>();
+        private readonly Dictionary<Closure, Func<IEventArguments, bool>> _functions = new Dictionary<Closure, Func<IEventArguments, bool>>();
 
         [MoonSharpHidden]
         private readonly Dictionary<Script, List<Func<IEventArguments, bool>>> _registeredFunctions = new Dictionary<Script, List<Func<IEventArguments, bool>>>();
@@ -27,7 +27,6 @@ namespace LuaLab.ObjectsWrappers.Events
                 {
                     throw new ArgumentException("Unable to add function to event handler");
                 }
-
                 Func<IEventArguments, bool> handler = (args) =>
                 {
                     DynValue luaArgs = DynValue.FromObject(null, args);
@@ -43,7 +42,7 @@ namespace LuaLab.ObjectsWrappers.Events
                 }
                 list.Add(handler);
 
-                _functions.Add(handler);
+                _functions.Add(function.Function, handler);
             }
             catch (Exception ex)
             {
@@ -63,16 +62,16 @@ namespace LuaLab.ObjectsWrappers.Events
 
                 if (_registeredFunctions.TryGetValue(function.Function.OwnerScript, out List<Func<IEventArguments, bool>> list))
                 {
-                    Func<IEventArguments, bool> handlerToRemove = list.Find(handler => handler.Method.Equals(function.Function.GetDelegate().Method));
+                    Func<IEventArguments, bool> handlerToRemove = _functions[function.Function];
 
                     if (handlerToRemove != null)
                     {
-                        _functions.Remove(handlerToRemove);
+                        _functions.Remove(function.Function);
                         list.Remove(handlerToRemove);
-
                         if (list.Count == 0)
                         {
                             _registeredFunctions.Remove(function.Function.OwnerScript);
+                            return;
                         }
                     }
                 }
@@ -90,7 +89,7 @@ namespace LuaLab.ObjectsWrappers.Events
         [MoonSharpVisible(true)]
         public bool Invoke(IEventArguments eventArgs)
         {
-            return _functions.All(n => n.Invoke(eventArgs));
+            return _functions.Values.All(n => n.Invoke(eventArgs));
         }
 
         [MoonSharpHidden]
@@ -102,7 +101,7 @@ namespace LuaLab.ObjectsWrappers.Events
                 {
                     Func<IEventArguments, bool> element = list[0];
                     list.Remove(element);
-                    _functions.Remove(element);
+                    _functions.Remove(_functions.FirstOrDefault(n => n.Value == element).Key);
                 }
             }
         }

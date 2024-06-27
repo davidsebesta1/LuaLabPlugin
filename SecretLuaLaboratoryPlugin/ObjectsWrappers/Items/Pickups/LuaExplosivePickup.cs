@@ -1,4 +1,5 @@
 ﻿using Footprinting;
+using InventorySystem;
 using InventorySystem.Items;
 using InventorySystem.Items.Pickups;
 using InventorySystem.Items.ThrowableProjectiles;
@@ -51,10 +52,7 @@ namespace LuaLab.ObjectsWrappers.Items.Pickups
                 {
                     if (_activateGrenade == null)
                     {
-                        ThrowableItem projectile = CreateThrowable(_itemPickupBase.Info.ItemId, _itemPickupBase.PreviousOwner.Hub);
-                        _activateGrenade = SpawnActive(projectile, _itemPickupBase.Position, fuseTime: value, _itemPickupBase.PreviousOwner.Hub);
-                        _itemPickupBase.DestroySelf();
-
+                        _activateGrenade = SpawnActive(((TimedGrenadePickup)_itemPickupBase), _itemPickupBase.Position, fuseTime: value, _itemPickupBase.PreviousOwner.Hub);
                         return;
                     }
 
@@ -65,7 +63,6 @@ namespace LuaLab.ObjectsWrappers.Items.Pickups
                     }
 
                     _activateGrenade.Network_syncTargetTime = NetworkTime.time + value;
-
                 }
                 catch (Exception ex)
                 {
@@ -90,31 +87,41 @@ namespace LuaLab.ObjectsWrappers.Items.Pickups
             {
                 if (value && _activateGrenade == null)
                 {
-                    ThrowableItem projectile = CreateThrowable(_itemPickupBase.Info.ItemId, _itemPickupBase.PreviousOwner.Hub);
-                    _activateGrenade = SpawnActive(projectile, _itemPickupBase.Position, fuseTime: 0.1f, _itemPickupBase.PreviousOwner.Hub);
-                    _itemPickupBase.DestroySelf();
+                    _activateGrenade = SpawnActive(((TimedGrenadePickup)_itemPickupBase), _itemPickupBase.Position, fuseTime: 0.1f, _itemPickupBase.PreviousOwner.Hub);
+                    return;
                 }
             }
         }
 
         [MoonSharpHidden]
-        private static ThrowableItem CreateThrowable(ItemType type, ReferenceHub player = null)
+        private static TimeGrenade SpawnActive(TimedGrenadePickup item, Vector3 position, float fuseTime = 3.5f, ReferenceHub owner = null)
         {
-            return ((player != null) ? player : ReferenceHub.HostHub).inventory.CreateItemInstance(new ItemIdentifier(type, ItemSerialGenerator.GenerateNext()), updateViewmodel: false) as ThrowableItem;
-        }
+            TimeGrenade thrownProjectile = null;
+            if (InventoryItemLoader.AvailableItems.TryGetValue(item.Info.ItemId, out var value) && value is ThrowableItem throwableItem)
+            {
+                thrownProjectile = (TimeGrenade)Object.Instantiate(throwableItem.Projectile);
 
-        [MoonSharpHidden]
-        private static TimeGrenade SpawnActive(ThrowableItem item, Vector3 position, float fuseTime = -1f, ReferenceHub owner = null)
-        {
-            TimeGrenade timeGrenade = (TimeGrenade)Object.Instantiate(item.Projectile, position, Quaternion.identity);
+                if (thrownProjectile.PhysicsModule is PickupStandardPhysics pickupStandardPhysics && item.PhysicsModule is PickupStandardPhysics pickupStandardPhysics2)
+                {
+                    Rigidbody rb = pickupStandardPhysics.Rb;
+                    Rigidbody rb2 = pickupStandardPhysics2.Rb;
+                    rb.position = rb2.position;
+                    rb.rotation = rb2.rotation;
+                    rb.velocity = rb2.velocity;
+                    rb.angularVelocity = rb2.angularVelocity;
+                }
 
-            timeGrenade.NetworkInfo = new PickupSyncInfo(item.ItemTypeId, item.Weight, item.ItemSerial);
-            timeGrenade.PreviousOwner = new Footprint(owner ?? ReferenceHub.HostHub);
-            NetworkServer.Spawn(timeGrenade.gameObject);
-            timeGrenade.ServerActivate();
+                item.Info.Locked = true;
+                thrownProjectile.NetworkInfo = item.Info;
+                thrownProjectile.PreviousOwner = item._attacker;
+                NetworkServer.Spawn(thrownProjectile.gameObject);
+                thrownProjectile.ServerActivate();
 
-            timeGrenade.Network_syncTargetTime = NetworkTime.time + fuseTime;
-            return timeGrenade;
+                thrownProjectile.Network_syncTargetTime = NetworkTime.time + fuseTime;
+                item.DestroySelf();
+            }
+
+            return thrownProjectile;
         }
 
         public override bool Equals(object obj)
