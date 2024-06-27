@@ -23,7 +23,7 @@ end
 ```
 
 ```lua
-Facility[RoomName.Lcz914].Doors[0].Permissions = KeycardPermissions.ContainmentLevelThree | KeycardPermissions.ScpOverride
+Facility[RoomName.Lcz914].Doors[1].Permissions = KeycardPermissions.ContainmentLevelThree | KeycardPermissions.ScpOverride
 
 
 --Makes 914 room accessible by either containment level 3 card or any SCP
