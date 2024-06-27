@@ -4,7 +4,7 @@
 Representation of a whole zone inside of the facility. Allows scripters to get it´s rooms and access light features
 
 ## Properties
-`ZoneType` - Readonly enum FacilityZone value of this zone type.<br>
+`ZoneType` - Readonly enum [`FacilityZone`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/FacilityZone.md) value of this zone type.<br>
 `Rooms` - Returns a new array of all rooms inside of this facility zone.<br>
 
 ## Functions
