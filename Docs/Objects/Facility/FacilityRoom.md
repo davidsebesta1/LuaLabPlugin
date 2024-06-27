@@ -5,9 +5,9 @@ An object representing a single room inside of the facility, allowing you to mod
 
 ## Properties
 `Doors` - Returns a new array of all doors that this room has inside of it.<br>
-`Shape` - Readonly RoomShape enum of shape of this room.<br>
-`Name` - Readonly RoomName enum of how is this room internally called.<br>
-`Zone` - Readonly `FacilityZone` object of which this room is in.<br>
+`Shape` - Readonly [`RoomShape`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/RoomShape.md) enum of shape of this room.<br>
+`Name` - Readonly [`RoomName`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/RoomName.md) enum of how is this room internally called.<br>
+`Zone` - Readonly [`FacilityZone`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Facility/FacilityZone.md) object of which this room is in.<br>
 `LightsEnabled` - Bool value whenever lights in this room.<br>
 `LightColor` - A color value (RGB each 0f - 1f) of this room lights color.<br>
 
