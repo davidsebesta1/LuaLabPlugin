@@ -1,7 +1,8 @@
 # Tesla Gate
 
 ## About
-An object representing a single tesla gate, allowing you to control it.
+An object representing a single tesla gate, allowing you to control it.<br>
+All tesla gates instances can be retrived by `Facility.TeslaGates`.
 
 ## Properties
 `Room` - Readonly value about the room this tesla is in.
