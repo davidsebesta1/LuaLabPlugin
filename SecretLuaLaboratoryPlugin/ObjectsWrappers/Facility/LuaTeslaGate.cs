@@ -32,7 +32,7 @@ namespace LuaLab.ObjectsWrappers.Facility
         }
 
         [MoonSharpVisible(true)]
-        public void InstantBurts()
+        public void InstantBurst()
         {
             _tesla.RpcInstantBurst();
         }

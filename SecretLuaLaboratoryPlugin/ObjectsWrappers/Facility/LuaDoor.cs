@@ -49,11 +49,11 @@ namespace LuaLab.ObjectsWrappers.Facility
         {
             get
             {
-                return _facilityDoor.IsOpened;
+                return _facilityDoor.OriginalObject.NetworkTargetState;
             }
             set
             {
-                _facilityDoor.IsOpened = value;
+                _facilityDoor.OriginalObject.NetworkTargetState = value;
             }
         }
 

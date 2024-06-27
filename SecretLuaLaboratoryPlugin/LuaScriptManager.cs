@@ -75,6 +75,7 @@ namespace LuaLab
             script.Globals["Players"] = Plugin.Instance.LuaPlayerManager;
             script.Globals["Events"] = Plugin.Instance.LuaEventManager;
             script.Globals["Round"] = Plugin.Instance.LuaRoundManager;
+            script.Globals["Facility"] = Plugin.Instance.LuaFacilityManager;
             script.Globals["Server"] = Plugin.Instance.LuaServerManager;
             script.Globals["Cassie"] = Plugin.Instance.LuaCassie;
 
@@ -85,8 +86,8 @@ namespace LuaLab
             script.Globals["ItemType"] = UserData.CreateStatic<ItemType>();
             script.Globals["ItemCategory"] = UserData.CreateStatic<ItemCategory>();
             script.Globals["ItemTierFlags"] = UserData.CreateStatic<ItemTierFlags>();
-            script.Globals["RoomShapes"] = UserData.CreateStatic<RoomShape>();
-            script.Globals["RoomNames"] = UserData.CreateStatic<RoomName>();
+            script.Globals["RoomShape"] = UserData.CreateStatic<RoomShape>();
+            script.Globals["RoomName"] = UserData.CreateStatic<RoomName>();
             script.Globals["FacilityZones"] = UserData.CreateStatic<FacilityZone>();
             script.Globals["DoorLockReasons"] = UserData.CreateStatic<DoorLockReason>();
             script.Globals["KeycardPermissions"] = UserData.CreateStatic<KeycardPermissions>();

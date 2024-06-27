@@ -24,6 +24,7 @@ using PluginAPI.Core.Attributes;
 using PluginAPI.Core.Doors;
 using PluginAPI.Enums;
 using PluginAPI.Events;
+using SecretLuaLaboratoryPlugin.ObjectsWrappers.Managers;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -47,6 +48,7 @@ namespace LuaLab
         public LuaRoundManager LuaRoundManager { get; private set; }
         public LuaServerManager LuaServerManager { get; private set; }
         public LuaPluginManager LuaPluginManager { get; private set; }
+        public LuaFacilityManager LuaFacilityManager { get; private set; }
         public LuaCassie LuaCassie { get; private set; }
 
         private Harmony _harmony;
@@ -80,6 +82,7 @@ namespace LuaLab
             LuaPlayerManager = new LuaPlayerManager();
             LuaRoundManager = new LuaRoundManager();
             LuaServerManager = new LuaServerManager();
+            LuaFacilityManager = new LuaFacilityManager();
 
             LuaScriptManager = new LuaScriptManager();
             LuaPluginManager = new LuaPluginManager();

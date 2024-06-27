@@ -1,6 +1,7 @@
 ﻿using MapGeneration;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
+using PluginAPI.Core;
 using PluginAPI.Core.Doors;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace LuaLab.ObjectsWrappers.Facility
         {
             _roomIdentifier = roomIdentifier;
 
-            _doors = PluginAPI.Core.Facility.Doors.Where(n => n.Room.Identifier == _roomIdentifier).ToArray();
+            _doors = _roomIdentifier.ApiRoom._doors.Values.ToArray();
         }
 
         [MoonSharpVisible(true)]
