@@ -3,8 +3,6 @@ using MapGeneration.Distributors;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
 using PlayerRoles.PlayableScps.Scp079;
-using PluginAPI.Core.Zones.Heavy;
-using PluginAPI.Roles;
 using System.Linq;
 
 namespace SecretLuaLaboratoryPlugin.ObjectsWrappers.Managers
