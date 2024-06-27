@@ -1,10 +1,10 @@
 # Grenade Pickup
 
 ## About
-Inherited class from [ItemPickup]() allowing you to control grenades. Grenades in SL are considered Explosive grenade, flashbang and SCP-018.
+Inherited class from [ItemPickup](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Items/Pickups/ItemPickup.md) allowing you to control grenades. Grenades in SL are considered Explosive grenade, flashbang and SCP-018.
 
 ## Properties
-`Owner` - Readonly player reference to the player which dropped it.<br>
+`Owner` - Readonly [player](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Player/Player.md) reference to the player which dropped it.<br>
 `FuseTime` - Decimal value of when the grenade is gonna explode. Setting it <= 0 will cause grenade to instantly explode. Setting it anything above will set it off and start the detonation countdown<br>
 `Detonated` - Boolean value of if the grenade has exploded. Setting it to true will result in a instant detonation.<br>
 
