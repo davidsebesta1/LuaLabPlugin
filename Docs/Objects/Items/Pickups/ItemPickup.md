@@ -8,7 +8,7 @@ This class has inherited classes for firearm and ammo pickup.
 `Position` - Vector3 world position of this pickup.<br>
 `Rotation` - Euler angles (degrees angle) of this item pickup.<br>
 `Scale` - Vector3 scale of this pickup.<br>
-`ItemType` - Readonly enum of type ItemType.<br>
+`ItemType` - Readonly enum of type [`ItemType`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/ItemTypeId.md).<br>
 `ItemSerial` - Unique readonly number of associated item.<br>
 `Locked` - Boolean value representing whenever this can be picked up.<br>
 
