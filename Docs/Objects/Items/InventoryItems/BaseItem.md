@@ -4,8 +4,8 @@
 A base class for any inventory item. Contains base information about it.
 
 ## Properties
-`ItemType` - Readonly Enum of type ItemType.<br>
-`ItemCategory` - Readonly Enum of type ItemCategory.<br>
+`ItemType` - Readonly Enum of type [`ItemType`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/ItemTypeId.md).<br>
+`ItemCategory` - Readonly Enum of type [`ItemCategory`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/ItemCategory.md).<br>
 `Serial` - Readonly Whole number of this items unique number.<br>
 `Weight` - Readonly Decimal number of this item weight.<br>
 `Owner` - Readonly Reference to the player in which inventory it is<br>
