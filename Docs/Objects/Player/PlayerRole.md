@@ -1,13 +1,13 @@
 # Player Role
 
 ## About
-Object inside of `Player` for in game role management
+Object inside of [`Player`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Player/Player.md) for in game role management
 
 ## Properties
-`RoleType` - Value of type `RoleTypeId` for getting and setting current role type¨
+`RoleType` - Value of type [`RoleTypeId`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/ItemTypeId.md) for getting and setting current role type¨
 
 ## Functions
-`SetRole(RoleTypeId, RoleChangeReason, RoleSpawnFlags)` - Advanced function for setting player role with specifed changing reason and spawn flags
+`SetRole([RoleTypeId](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/ItemTypeId.md), [RoleChangeReason](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/RoleChangeReason.md), [RoleSpawnFlags](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/RoleSpawnFlags.md))` - Advanced function for setting player role with specifed changing reason and spawn flags
 
 Code Example:
 
