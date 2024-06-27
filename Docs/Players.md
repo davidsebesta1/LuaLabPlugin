@@ -1,7 +1,7 @@
 # Players
 
 ## About
-`Players` is a global variable for getting all or specific players (wow).
+`Players` is a global variable for getting all or specific players.
 
 ## Usage
 
