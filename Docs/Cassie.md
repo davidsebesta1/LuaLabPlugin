@@ -11,8 +11,11 @@
 `GlitchyMessage(message, glitchChance, jamChance)` - Sends a cassie message with glitch chance after each word (0-1 value) and jam chance after each word (0-1 value).<br>
 `Clear()` - Clears the cassie current queue.<br>
 `CalculateDuration(message)` - Returns a decimal number for however message is gonna take for it to be spoken by cassie<br>
-`ConvertTeam(Team, unitName)` - Converts team to death message.<br> Example: Team.ClassD returns 'BY CLASSD PERSONNEL' and etc. <br>
-Unit name is converted to NATO_X Y. <br>
+`ConvertTeam(Team, unitName)` - Converts team to death message.
+<br><br> 
+Example: [Team.ClassD](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/Team.md) returns 'BY CLASSD PERSONNEL' and etc. <br>
+Unit name is converted to NATO_X Y.
+<br><br>
 Example: 'ALPHA-5' is converted to 'NATO_A 5'<br>
 `ConvertNumber(number)` - Converts a whole number to text.<br>
 Example: 505 is converted to 'Five hundered and five'<br>
