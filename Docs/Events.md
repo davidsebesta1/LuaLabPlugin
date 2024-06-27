@@ -40,8 +40,8 @@ Events.GrenadeExploded.add(onGrenadeExploding)
 ```
 
 <br><br>
-## Available Events
-These are the events that are currently available in format EventName - Objects that are inside of args param<br>
+## Event Availability
+Most of the standard NWAPI events are supported. Rows with strikethrough are not supported or partially supported *(some arguments will have nil value)*.<br> Data are in format: EventName - Objects that are inside of args param<br>
 `PlayerJoined` - `Player` <br>
 `PlayerLeft` - `Player` <br>
 `PlayerDying` - `Player` `Attacker` `DamageHandler` <br>
