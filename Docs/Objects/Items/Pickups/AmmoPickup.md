@@ -1,7 +1,7 @@
 # Ammo Pickup
 
 ## About
-Inherited class from [ItemPickup](link). Allows you to change the content of the ammo pickup
+Inherited class from [ItemPickup](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Items/Pickups/ItemPickup.md). Allows you to change the content of the ammo pickup
 
 ## Properties
 `Ammo` - Amount of the ammo inside of this pickup
