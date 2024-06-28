@@ -39,6 +39,10 @@ end
 Events.GrenadeExploded.add(onGrenadeExploding)
 ```
 
+## Required delay
+Unfortunely, some events such as `PlayerChangeRole` require a little bit of delay before executing any code that may change player properties such as health, position and inventory items.<br>
+For this, I have added the `doAfter(delayInSeconds, function)` to execute code with delay without blocking the main thread. For more info see [this](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/ExecutingCodeWithDelay.md).
+
 <br><br>
 ## Event Availability
 Most of the standard NWAPI events are supported. Rows with strikethrough are not supported or partially supported *(some arguments will have nil value)*.<br> Data are in format: EventName - Objects that are inside of args param<br>
