@@ -76,7 +76,7 @@ namespace LuaLab.ObjectsWrappers.Facility
         }
 
         [MoonSharpVisible(true)]
-        public Color LightColor
+        public Color LightsColor
         {
             get
             {

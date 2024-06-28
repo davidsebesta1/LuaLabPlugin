@@ -1,4 +1,5 @@
-﻿using MapGeneration;
+﻿using HarmonyLib;
+using MapGeneration;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
 using System;
@@ -14,7 +15,7 @@ namespace LuaLab.ObjectsWrappers.Facility
         private readonly FacilityZone _zone;
 
         [MoonSharpHidden]
-        private RoomIdentifier[] _rooms;
+        private readonly RoomIdentifier[] _rooms;
 
         public LuaFacilityZone(FacilityZone zone)
         {
@@ -43,10 +44,7 @@ namespace LuaLab.ObjectsWrappers.Facility
         [MoonSharpVisible(true)]
         public void FlickerLights(float duration)
         {
-            foreach (RoomIdentifier room in _rooms)
-            {
-                room.ApiRoom.Lights.FlickerLights(duration);
-            }
+            RoomLightController.Instances.Where(n => _rooms.Contains(n.Room)).Do(n => n.ServerFlickerLights(duration));
         }
 
         [MoonSharpVisible(true)]

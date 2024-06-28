@@ -6,11 +6,14 @@ using InventorySystem.Items.Pickups;
 using LuaLab.Helpers;
 using LuaLab.ObjectsWrappers.Facility;
 using MapGeneration;
+using MEC;
 using MoonSharp.Interpreter;
 using PlayerRoles;
 using PluginAPI.Core;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace LuaLab
@@ -64,7 +67,7 @@ namespace LuaLab
 
         public Script CreateScript(ReferenceHub owner, LuaOutputType outputType, LuaPlugin pluginObject = null)
         {
-            Script script = new Script(CoreModules.Preset_HardSandbox);
+            Script script = new Script(CoreModules.Preset_HardSandbox | CoreModules.OS_Time);
             if (pluginObject != null)
             {
                 pluginObject.Script = script;
@@ -88,7 +91,7 @@ namespace LuaLab
             script.Globals["ItemTierFlags"] = UserData.CreateStatic<ItemTierFlags>();
             script.Globals["RoomShape"] = UserData.CreateStatic<RoomShape>();
             script.Globals["RoomName"] = UserData.CreateStatic<RoomName>();
-            script.Globals["FacilityZones"] = UserData.CreateStatic<FacilityZone>();
+            script.Globals["FacilityZone"] = UserData.CreateStatic<FacilityZone>();
             script.Globals["DoorLockReasons"] = UserData.CreateStatic<DoorLockReason>();
             script.Globals["KeycardPermissions"] = UserData.CreateStatic<KeycardPermissions>();
             script.Globals["FirearmStatusFlags"] = UserData.CreateStatic<FirearmStatusFlags>();
@@ -96,6 +99,9 @@ namespace LuaLab
             script.Globals["DoorType"] = UserData.CreateStatic<DoorType>();
 
             //Global functions
+
+            //Sleep
+            script.Globals["doAfter"] = (Action<float, DynValue>)LuaWaitHelper.DoAfter;
 
             //Items
             script.Globals["SpawnItem"] = (Func<Vector3, ItemType, ItemPickupBase>)ItemHelpers.SpawnItem;
@@ -173,20 +179,6 @@ namespace LuaLab
                     };
                     break;
             }
-
-            //Float
-            Script.GlobalOptions.CustomConverters.SetScriptToClrCustomConversion(DataType.Number, typeof(float),
-            dynVal =>
-            {
-                return dynVal.Number;
-            });
-
-            //Float
-            Script.GlobalOptions.CustomConverters.SetScriptToClrCustomConversion(DataType.Boolean, typeof(bool),
-            dynVal =>
-            {
-                return dynVal.Boolean;
-            });
 
             return script;
         }

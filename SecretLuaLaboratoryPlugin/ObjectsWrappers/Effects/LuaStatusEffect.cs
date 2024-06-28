@@ -44,7 +44,7 @@ namespace LuaLab.ObjectsWrappers.Effects
             }
             set
             {
-                _statusEffectBase.IsEnabled = value;
+                _statusEffectBase.ServerSetState((byte)(value ? 1 : 0));
             }
         }
 
@@ -57,7 +57,7 @@ namespace LuaLab.ObjectsWrappers.Effects
             }
             set
             {
-                _statusEffectBase.Intensity = value;
+                _statusEffectBase.ServerSetState(value, _statusEffectBase.Duration);
             }
         }
 
@@ -70,7 +70,7 @@ namespace LuaLab.ObjectsWrappers.Effects
             }
             set
             {
-                _statusEffectBase.Duration = value;
+                _statusEffectBase.ServerSetState(_statusEffectBase.Intensity, value);
             }
         }
 
