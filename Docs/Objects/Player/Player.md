@@ -43,7 +43,10 @@ Code Examples:
 ```lua
 function playerChangeRole(args)
     if args.NewRole == RoleTypeId.NtfCaptain then
-        args.Player.Health = 110 -- Setting player health to 110 if new role is NtfCaptain
+        doAfter(0.1, function()
+            args.Player.Health = 110
+            end);
+        return true
     end
 end
 
