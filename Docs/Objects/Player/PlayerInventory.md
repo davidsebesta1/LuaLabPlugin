@@ -28,10 +28,12 @@ Code Examples:
 
 ```lua
 function playerChangeRole(args)
-    if args.NewRole == RoleTypeId.ClassD && args.ChangeReason == RoleChangeReason.RoundStart then
-        if math.random() > 0.5 then
-            args.Player.Inventory:GiveItem(ItemType.Coin)
-        end
+    if args.NewRole == RoleTypeId.ClassD and args.ChangeReason == RoleChangeReason.RoundStart then
+        doAfter(0.1, function()
+            if math.random() > 0.5 then
+                args.Player.Inventory:GiveItem(ItemType.Coin)
+            end
+        end)
     end
 end
 
