@@ -1,6 +1,6 @@
 # Lua Lab Plugin
 
-SCP Secret Laboratory Plugin for writing and executing scripts in Lua using Moonsharp interpreter, allowing players to create their own plugins easier and without needing to setup Visual Studio or other IDE.
+SCP Secret Laboratory Plugin for writing and executing scripts in Lua using Moonsharp interpreter, allowing players to create their own scripts easier and without needing to setup Visual Studio or other IDE.
 
 ## Features
 ### Simple API to work with
@@ -11,7 +11,7 @@ SCP Secret Laboratory Plugin for writing and executing scripts in Lua using Moon
 - Everything is documentated and includes sample code
 
 ## Plugin Management
-- 1 lua file = 1 plugin. Any required lua dependencies are put into seperate folder
+- 1 lua file = 1 plugin. Any required lua dependencies are put into seperate folder.
 
 ## Sandboxing
 - Each .lua and player that executes code has its own environment, so you dont need to worry about collisions
@@ -26,6 +26,6 @@ SCP Secret Laboratory Plugin for writing and executing scripts in Lua using Moon
 - Reloads the script with keeping the state of the **global** variables
 
 ## Lua Execution in game
-- Plugin allows specified players to execute any lua code in game via RA console.
-- Useful for doing one-time tasks that may require automation, such as setup up events, loadouts and et cetera.
+- Allows specified players to execute any Lua code in game via RA console.
+- Useful for doing one-time tasks that may require automation, such as setup up events, loadouts and etc.
 **Note that allowing players to execute code is a dangerous permission and should be given to trusted individual.**
