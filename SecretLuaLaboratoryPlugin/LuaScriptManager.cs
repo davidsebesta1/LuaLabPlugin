@@ -80,7 +80,7 @@ namespace LuaLab
             script.Globals["Cassie"] = Plugin.Instance.LuaCassie;
 
             //Enums
-            script.Globals["RoleTypes"] = UserData.CreateStatic<RoleTypeId>();
+            script.Globals["RoleTypeId"] = UserData.CreateStatic<RoleTypeId>();
             script.Globals["RoleChangeReason"] = UserData.CreateStatic<RoleChangeReason>();
             script.Globals["RoleSpawnFlags"] = UserData.CreateStatic<RoleSpawnFlags>();
             script.Globals["ItemType"] = UserData.CreateStatic<ItemType>();

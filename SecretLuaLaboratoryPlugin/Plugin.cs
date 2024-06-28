@@ -5,6 +5,7 @@ using InventorySystem.Items;
 using InventorySystem.Items.Firearms;
 using InventorySystem.Items.Firearms.Ammo;
 using InventorySystem.Items.Pickups;
+using InventorySystem.Items.Radio;
 using InventorySystem.Items.ThrowableProjectiles;
 using LuaLab.Helpers.Descriptors;
 using LuaLab.ObjectsWrappers.DamageHandlers;
@@ -57,6 +58,7 @@ namespace LuaLab
         [PluginPriority(LoadPriority.Highest)]
         public void Start()
         {
+
             if (!Config.IsEnabled)
             {
                 return;
