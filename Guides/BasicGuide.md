@@ -60,4 +60,4 @@ Put all lua code inside of a single line starting with `lua`
 
 Example:
 `lua print("a")`<br>
-`function onPluginLoad(args) print("Sample code loaded!") end plugin.PluginLoaded:add(onPluginLoad)`
+`for key, value in pairs(Players.AllPlayers) do value:broadcast("Sí plas plas", 5) end`
