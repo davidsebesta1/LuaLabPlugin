@@ -59,4 +59,5 @@ You need `ServerConsoleCommands` and your steamID be specified in plugin config 
 Put all lua code inside of a single line starting with `lua`
 
 Example:
-`lua print("a")`
+`lua print("a")`<br>
+`for key, value in pairs(Players.AllPlayers) do value:broadcast("Sí plas plas", 5) end`

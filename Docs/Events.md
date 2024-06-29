@@ -11,7 +11,6 @@ Every event has a single argument, which is a object containing all information 
 Code example:
 ```lua
 function playerJoined(args) -- single args object containing all event properties
-    LastPlayerJoined = args.Player
     print("Welcome " .. args.Player.Username)
 end
 
