@@ -53,3 +53,10 @@ Plugin.PluginReloaded:add(function(args) -- Called after the reload has been ful
     end
 end)
 ```
+
+## Executing in RA
+You need `ServerConsoleCommands` and your steamID be specified in plugin config file to be able to exec any code.<br>
+Put all lua code inside of a single line starting with `lua`
+
+Example:
+`lua print("a")`
