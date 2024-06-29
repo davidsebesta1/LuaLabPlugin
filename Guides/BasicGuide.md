@@ -59,4 +59,5 @@ You need `ServerConsoleCommands` and your steamID be specified in plugin config 
 Put all lua code inside of a single line starting with `lua`
 
 Example:
-`lua print("a")`
+`lua print("a")`<br>
+`function onPluginLoad(args) print("Sample code loaded!") end plugin.PluginLoaded:add(onPluginLoad)`
