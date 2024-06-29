@@ -32,7 +32,7 @@ An object represnting player. Allows developer to access and modify player prope
 ## Functions
 `Kick(reason)` - Kicks the player<br>
 `Ban(reason, durationInSeconds)` -  Bans the player with reason for specified duration<br>
-`Broadcast(message,durationInSeconds,ClearPrevious)` - Sends broadcast to the player
+`Broadcast(message,durationInSeconds,ClearPrevious)` - Sends broadcast to the player<br>
 `Hint(message, duration)` - Sends a hint to the player
 
 > [!TIP]
