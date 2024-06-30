@@ -58,7 +58,7 @@ end)
 ```
 
 ## Executing in RA
-You need `ServerConsoleCommands` and your steamID be specified in plugin config file to be able to exec any code.<br>
+You need your steamID be specified in plugin config file to be able to exec any code.<br>
 Put all lua code inside of a single line starting with `lua`
 
 Example:
