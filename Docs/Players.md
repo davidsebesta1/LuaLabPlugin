@@ -12,7 +12,7 @@ A get-only variable returning a new array of all players currently in game.
 Code example:
 ```lua
 for key, value in pairs(Players.AllPlayers) do
-    value:broadcast("Sí plas plas", 5)
+    value:Broadcast("Sí plas plas", 5)
 end
 ```
 
@@ -29,7 +29,7 @@ player1 = Players[1]
 
 player1:broadcast("Hello from Lua", 5)
 
-Players["YourNickname"]:hint("Hint", 3)
+Players["YourNickname"]:Hint("Hint", 3)
 ```
 
 ### Functions
@@ -51,6 +51,6 @@ Code example:
 ```lua
 Players.Kick(Players["YourNickname"], "Grenade in elevator")
 
-Players["YourNickname"].Kick("Grenade in elevator")
+Players["YourNickname"]:Kick("Grenade in elevator")
 --both options are valid
 ```
