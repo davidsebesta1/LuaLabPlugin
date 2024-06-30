@@ -61,6 +61,6 @@ end)
 You need your steamID be specified in plugin config file to be able to exec any code.<br>
 Put all lua code inside of a single line starting with `lua`
 
-Example:
+Example:<br>
 `lua print("a")`<br>
 `for key, value in pairs(Players.AllPlayers) do value:broadcast("Sí plas plas", 5) end`
