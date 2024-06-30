@@ -13,6 +13,9 @@ Once you setup this plugin and generate all required folders it should look like
 ## Main method
 Lua doesnt have any entry point method, it is simply executed from top bottom. However, since I support hot reload, there is a dedicated method that runs only once for a whole Lua plugin. This means any global variables required and initially setup should be declared there with global scope.<br>
 
+## Naming Convetions
+You can use both **P**ascal**C**ase or **c**amel**C**ase for accessing properties and methods. You can also use both `.` and `:` for accessing methods. 99.9% it doesnt matter.
+
 ## Global Variables
 Plugin automatically adds several global variable ranging from reference for local `plugin`, to `events`, `facility`, `server` and more.<br> One that I would like to focus on start is `plugin` which is a representation of... this plugin!<br>
 `plugin` object has several properties and events you can hook into:
