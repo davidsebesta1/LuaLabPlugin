@@ -20,7 +20,6 @@ namespace LuaLab.Commands
         {
             if (arguments.Count == 1)
             {
-                PlayerChangeRoleEvent
                 bool res = Plugin.Instance.LuaPluginManager.ReloadLuaPlugin(arguments.ElementAt(0));
                 response = res ? "Reloaded" : "Couldnt reload plugin, error has occured";
                 return res;
