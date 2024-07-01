@@ -23,10 +23,10 @@ Indexer directly on the `Players` object for getting specific player by his in g
 `Players["name"]`<br>
 Indexer directly on the `Players` object for getting a specific player by his in game username<br>
 
-`Players[[RoleTypeId](link)]`<br>
+`Players[[RoleTypeId](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/RoleTypeId.md)]`<br>
 Indexer that returns a array of players whose role is equal to the one in parameter.<br>
 
-`Players[[Team](link)]`<br>
+`Players[[Team](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Enums/Team.md)]`<br>
 Indexer returning an array of players whose team is equal to the one in parameter.<br>
 
 
