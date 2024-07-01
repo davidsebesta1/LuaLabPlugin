@@ -137,7 +137,7 @@ namespace SecretLuaLaboratoryPlugin.Objects.Player
         }
 
         [MoonSharpVisible(true)]
-        public Dictionary<string, object> SessionVariables => DictionaryPool<string, object>.Get();
+        public Table SessionVariables;
 
         [MoonSharpVisible(true)]
         public float StaminaRemaining

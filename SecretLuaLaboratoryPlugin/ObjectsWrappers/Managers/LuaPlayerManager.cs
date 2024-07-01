@@ -78,14 +78,15 @@ namespace LuaLab.ObjectsWrappers.Managers
         [PluginEvent]
         private void OnPlayerJoined(PlayerJoinedEvent args)
         {
-            _luaPlayersByHub.Add(args.Player.ReferenceHub, new LuaPlayer(args.Player.ReferenceHub));
+            LuaPlayer plr = new LuaPlayer(args.Player.ReferenceHub);
+            plr.SessionVariables = new Table(null);
+            _luaPlayersByHub.Add(args.Player.ReferenceHub, plr);
         }
 
         [MoonSharpHidden]
         [PluginEvent]
         private void OnPlayerLeft(PlayerLeftEvent args)
         {
-            DictionaryPool<string, object>.Release(_luaPlayersByHub[args.Player.ReferenceHub].SessionVariables);
             _luaPlayersByHub.Remove(args.Player.ReferenceHub);
         }
 
