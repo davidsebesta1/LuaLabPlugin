@@ -14,6 +14,8 @@
 `Start()` - Forcefully starts the round.<br>
 `End()` - Forcefully ends the round.<br>
 `Restart(fast)` - Restarts the round. If the paramater is set to true, no loading screen for players is presents and their screen is frozen until round has restarted.<br>
+`RespawnWave(SpawnableTeamType)` - Respawns a wave via normal game means by specified type.<br>
+`InstantRespawnWave(SpawnableTeamType)` - Instantly respawns a wave of players.<br>
 
 Code Examples:
 

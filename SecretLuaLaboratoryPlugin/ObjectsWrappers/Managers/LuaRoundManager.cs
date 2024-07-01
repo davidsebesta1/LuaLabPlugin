@@ -88,13 +88,13 @@ namespace LuaLab.ObjectsWrappers.Managers
         [MoonSharpVisible(true)]
         public void RespawnWave(SpawnableTeamType team)
         {
+            RespawnEffectsController.ExecuteAllEffects(RespawnEffectsController.EffectType.Selection, team);
             RespawnManager.Singleton.ForceSpawnTeam(team);
         }
 
         [MoonSharpVisible(true)]
         public void InstantRespawnWave(SpawnableTeamType team)
         {
-            RespawnEffectsController.ExecuteAllEffects(RespawnEffectsController.EffectType.Selection, team);
             RespawnManager.Singleton.ForceSpawnTeam(team);
         }
 
