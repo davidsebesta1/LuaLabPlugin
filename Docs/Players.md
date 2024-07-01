@@ -18,15 +18,15 @@ end
 
 ### Indexers
 `Players[X]`<br>
-Indexer directly on the `Players` object for getting specific player by his in game id (that one in brackers if you look into RA)<br>
+Indexer directly on the `Players` object for getting specific player by his in game id (that one in brackers if you look into RA).<br>
 
 `Players["name"]`<br>
-Indexer directly on the `Players` object for getting a specific player by his in game username<br>
+Indexer directly on the `Players` object for getting a specific player by his in game username.<br>
 
-`Players[[RoleTypeId](link)]`<br>
+`Players[RoleTypeId]`<br>
 Indexer that returns a array of players whose role is equal to the one in parameter.<br>
 
-`Players[[Team](link)]`<br>
+`Players[Team]`<br>
 Indexer returning an array of players whose team is equal to the one in parameter.<br>
 
 
