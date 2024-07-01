@@ -31,6 +31,7 @@ using System.Linq;
 using System.Reflection;
 using static BanHandler;
 using static CustomPlayerEffects.StatusEffectBase;
+using static Misc;
 
 namespace LuaLab
 {
@@ -138,6 +139,7 @@ namespace LuaLab
             UserData.RegisterType<ItemType>();
             UserData.RegisterType<ItemCategory>();
             UserData.RegisterType<ItemTierFlags>();
+            UserData.RegisterType<PlayerInfoColorTypes>();
 
             //Effects
             UserData.RegisterType<EffectClassification>();

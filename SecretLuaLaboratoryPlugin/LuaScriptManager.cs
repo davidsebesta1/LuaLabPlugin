@@ -15,6 +15,7 @@ using Respawning;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static Misc;
 
 namespace LuaLab
 {
@@ -134,6 +135,7 @@ namespace LuaLab
             script.Globals["Team"] = UserData.CreateStatic<Team>();
             script.Globals["DoorType"] = UserData.CreateStatic<DoorType>();
             script.Globals["SpawnableTeamType"] = UserData.CreateStatic<SpawnableTeamType>();
+            script.Globals["PlayerInfoColorTypes"] = UserData.CreateStatic<PlayerInfoColorTypes>();
 
             //Global functions
 
