@@ -5,7 +5,6 @@ using InventorySystem.Items;
 using InventorySystem.Items.Firearms;
 using InventorySystem.Items.Firearms.Ammo;
 using InventorySystem.Items.Pickups;
-using InventorySystem.Items.Radio;
 using InventorySystem.Items.ThrowableProjectiles;
 using LuaLab.Helpers.Descriptors;
 using LuaLab.ObjectsWrappers.DamageHandlers;
@@ -25,6 +24,7 @@ using PluginAPI.Core.Attributes;
 using PluginAPI.Core.Doors;
 using PluginAPI.Enums;
 using PluginAPI.Events;
+using Respawning;
 using SecretLuaLaboratoryPlugin.ObjectsWrappers.Managers;
 using System;
 using System.Linq;
@@ -132,6 +132,7 @@ namespace LuaLab
 
             //Roles and items
             UserData.RegisterType<RoleTypeId>();
+            UserData.RegisterType<SpawnableTeamType>();
             UserData.RegisterType<RoleChangeReason>();
             UserData.RegisterType<RoleSpawnFlags>();
             UserData.RegisterType<ItemType>();

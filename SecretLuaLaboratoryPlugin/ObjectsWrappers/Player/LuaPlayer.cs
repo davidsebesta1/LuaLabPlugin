@@ -1,14 +1,26 @@
-﻿using Hints;
+﻿using CommandSystem.Commands.RemoteAdmin;
+using Hints;
+using InventorySystem;
+using InventorySystem.Disarming;
 using InventorySystem.Items.Firearms.Modules;
+using LuaLab.Helpers;
 using MapGeneration;
+using Mirror;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
+using PlayerRoles;
+using PlayerRoles.FirstPersonControl;
 using PlayerStatsSystem;
 using PluginAPI.Core;
+using PluginAPI.Core.Items;
 using SecretLuaLaboratoryPlugin.ObjectsWrappers.Player;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
+using UnityEngine.Pool;
+using Utils.Networking;
 using VoiceChat;
 using static Broadcast;
 
@@ -80,6 +92,54 @@ namespace SecretLuaLaboratoryPlugin.Objects.Player
         }
 
         [MoonSharpVisible(true)]
+        public PlayerInfoArea InfoArea
+        {
+            get
+            {
+                return Hub.nicknameSync.Network_playerInfoToShow;
+            }
+            set
+            {
+                Hub.nicknameSync.Network_playerInfoToShow = value;
+            }
+        }
+
+        [MoonSharpVisible(true)]
+        public float InfoViewRange
+        {
+            get
+            {
+                return Hub.nicknameSync.NetworkViewRange;
+            }
+            set
+            {
+                Hub.nicknameSync.NetworkViewRange = value;
+            }
+        }
+
+        [MoonSharpVisible(true)]
+        public string CustomInfo
+        {
+            get
+            {
+                return Hub.nicknameSync.Network_customPlayerInfoString;
+            }
+            set
+            {
+                if (CustomInfoColorValidator.IsValid(value))
+                {
+                    Hub.nicknameSync.Network_customPlayerInfoString = value;
+                    return;
+                }
+
+                Log.Error($"Invalid color type for custom info of player {Hub.nicknameSync.MyNick}");
+            }
+        }
+
+        [MoonSharpVisible(true)]
+        public Dictionary<string, object> SessionVariables => DictionaryPool<string, object>.Get();
+
+        [MoonSharpVisible(true)]
         public float StaminaRemaining
         {
             get
@@ -136,6 +196,16 @@ namespace SecretLuaLaboratoryPlugin.Objects.Player
             get
             {
                 return Hub.PlayerId;
+            }
+        }
+
+        [MoonSharpVisible(true)]
+        public bool DoNotTrack
+        {
+            get
+            {
+                return Hub.authManager.DoNotTrack;
+
             }
         }
 
@@ -205,18 +275,84 @@ namespace SecretLuaLaboratoryPlugin.Objects.Player
             }
             set
             {
-                Vector3 euler = Hub.transform.rotation.eulerAngles;
-                Hub.transform.rotation = Quaternion.Euler(euler.x, value, euler.z);
+                Hub.TryOverridePosition(Hub.transform.position, new Vector3(0f, value, 0f));
             }
         }
+
+        [MoonSharpVisible(true)]
+        public Vector3 Scale
+        {
+            get
+            {
+                return Hub.transform.localScale;
+            }
+            set
+            {
+                try
+                {
+                    if (Hub.transform.localScale == value) return;
+
+                    Hub.transform.localScale = value;
+                    foreach (ReferenceHub plr in ReferenceHub.AllHubs.Where(n => n.authManager.InstanceMode == CentralAuth.ClientInstanceMode.ReadyClient))
+                    {
+                        NetworkServer.SendSpawnMessage(plr.networkIdentity, plr.connectionToClient);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex.ToString());
+                }
+            }
+        }
+
 
         [MoonSharpVisible(true)]
         public Vector3 AimingPoint
         {
             get
             {
-                Physics.Raycast(new Ray(Hub.PlayerCameraReference.position, Hub.PlayerCameraReference.forward), out RaycastHit hit, 1000f, StandardHitregBase.HitregMask);
+                Physics.Raycast(new Ray(Hub.PlayerCameraReference.position + Hub.PlayerCameraReference.forward * 0.1f, Hub.PlayerCameraReference.forward), out RaycastHit hit, 1000f, StandardHitregBase.HitregMask);
                 return hit.point;
+            }
+        }
+
+        [MoonSharpVisible(true)]
+        public bool IsDisarmed
+        {
+            get
+            {
+                return Hub.inventory.IsDisarmed();
+            }
+            set
+            {
+                if (value)
+                {
+                    Hub.inventory.SetDisarmedStatus(null);
+                    Hub.inventory.ServerDropEverything();
+                    DisarmedPlayers.Entries.Add(new DisarmedPlayers.DisarmedEntry(Hub.networkIdentity.netId, 0u));
+                    new DisarmedPlayersListMessage(DisarmedPlayers.Entries).SendToAuthenticated();
+
+                    return;
+                }
+
+                Hub.inventory.SetDisarmedStatus(null);
+                new DisarmedPlayersListMessage(DisarmedPlayers.Entries).SendToAuthenticated();
+            }
+        }
+
+        [MoonSharpVisible(true)]
+        public bool IsAlive
+        {
+            get
+            {
+                return Hub.roleManager.CurrentRole.RoleTypeId != RoleTypeId.Spectator && Hub.roleManager.CurrentRole.RoleTypeId != RoleTypeId.None;
+            }
+            set
+            {
+                if (Hub.roleManager.CurrentRole.RoleTypeId != RoleTypeId.Spectator && Hub.roleManager.CurrentRole.RoleTypeId != RoleTypeId.None)
+                {
+                    Hub.playerStats.KillPlayer(new CustomReasonDamageHandler("Death", float.MaxValue));
+                }
             }
         }
 

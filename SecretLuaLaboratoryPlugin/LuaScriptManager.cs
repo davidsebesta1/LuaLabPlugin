@@ -6,14 +6,14 @@ using InventorySystem.Items.Pickups;
 using LuaLab.Helpers;
 using LuaLab.ObjectsWrappers.Facility;
 using MapGeneration;
-using MEC;
 using MoonSharp.Interpreter;
 using PlayerRoles;
 using PluginAPI.Core;
+using PluginAPI.Core.Attributes;
+using PluginAPI.Events;
+using Respawning;
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace LuaLab
@@ -25,6 +25,42 @@ namespace LuaLab
         public LuaScriptManager()
         {
 
+        }
+
+        [PluginEvent]
+        private void OnPlayerLeft(PlayerLeftEvent args)
+        {
+            if (!_scriptsByCreators.TryGetValue(args.Player.ReferenceHub, out Script script))
+            {
+                return;
+            }
+
+            Plugin.Instance.LuaEventManager.ClearHandlersForScript(script);
+            _scriptsByCreators.Remove(args.Player.ReferenceHub);
+
+            Log.Info($"Cleared event handlers for {args.Player.ReferenceHub.nicknameSync.MyNick}");
+        }
+
+        public bool ClearEventHandlersForPlayer(ReferenceHub hub)
+        {
+            try
+            {
+                if (!_scriptsByCreators.TryGetValue(hub, out Script script))
+                {
+                    return false;
+                }
+
+                Plugin.Instance.LuaEventManager.ClearHandlersForScript(script);
+                _scriptsByCreators.Remove(hub);
+
+                Log.Info($"Cleared event handlers for {hub.nicknameSync.MyNick}");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Failed to clear event handlers for {hub.nicknameSync.MyNick}: {ex}");
+                return false;
+            }
         }
 
         public void ExecuteLuaInGame(ReferenceHub executor, string code, LuaOutputType outputType)
@@ -97,6 +133,7 @@ namespace LuaLab
             script.Globals["FirearmStatusFlags"] = UserData.CreateStatic<FirearmStatusFlags>();
             script.Globals["Team"] = UserData.CreateStatic<Team>();
             script.Globals["DoorType"] = UserData.CreateStatic<DoorType>();
+            script.Globals["SpawnableTeamType"] = UserData.CreateStatic<SpawnableTeamType>();
 
             //Global functions
 

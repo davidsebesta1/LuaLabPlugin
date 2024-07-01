@@ -80,9 +80,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ClearHandlersCommand.cs" />
     <Compile Include="Commands\ExecLuaCommand.cs" />
     <Compile Include="Commands\ReloadLuaPluginCommand.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Helpers\CustomInfoColorValidator.cs" />
     <Compile Include="Helpers\Descriptors\CustomUserDataDescriptor.cs" />
     <Compile Include="Helpers\ItemHelpers.cs" />
     <Compile Include="Helpers\LuaWaitHelper.cs" />

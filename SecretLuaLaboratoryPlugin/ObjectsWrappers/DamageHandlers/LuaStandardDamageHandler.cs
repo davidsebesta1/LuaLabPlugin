@@ -23,5 +23,19 @@ namespace LuaLab.ObjectsWrappers.DamageHandlers
             }
         }
 
+        [MoonSharpVisible(true)]
+        public string Reason
+        {
+            get
+            {
+                if (_originalDamageHandler is AttackerDamageHandler attackerHandler)
+                {
+                    return $"Killed by {attackerHandler.Attacker.Nickname}";
+                }
+
+                return "Unknown";
+            }
+        }
+
     }
 }

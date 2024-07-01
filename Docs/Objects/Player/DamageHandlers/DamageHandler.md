@@ -10,7 +10,7 @@ Code Example:
 
 ```lua
 function onPlayerDying(args)
-    args.Player:broadcast("You died, damage taken: " .. args.DamageHandler.Damage, 5)
+    args.Player:broadcast(args.DamageHandler.Reason .. "\nTaken " .. args.DamageHandler.Damage .. " damage", 5)
     return true
 end
 

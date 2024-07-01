@@ -18,10 +18,17 @@ end
 
 ### Indexers
 `Players[X]`<br>
-Indexer directly on the `Players` object for getting specific player by his in game id (that one in brackers if you look into RA)
+Indexer directly on the `Players` object for getting specific player by his in game id (that one in brackers if you look into RA)<br>
 
-`Players["name"]`
+`Players["name"]`<br>
 Indexer directly on the `Players` object for getting a specific player by his in game username<br>
+
+`Players[[RoleTypeId](link)]`<br>
+Indexer that returns a array of players whose role is equal to the one in parameter.<br>
+
+`Players[[Team](link)]`<br>
+Indexer returning an array of players whose team is equal to the one in parameter.<br>
+
 
 Code example:
 ```lua
@@ -30,6 +37,13 @@ player1 = Players[1]
 player1:broadcast("Hello from Lua", 5)
 
 Players["YourNickname"]:Hint("Hint", 3)
+```
+
+```lua
+for key,value in pairs(Players[RoleTypeId.ClassD]) do
+    value:GiveItem(ItemType.Medkit)
+end
+--Gives medkit to all Class D players
 ```
 
 ### Functions

@@ -1,11 +1,13 @@
 ﻿using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
+using PlayerRoles;
 using PluginAPI.Core;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Events;
 using SecretLuaLaboratoryPlugin.Objects.Player;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Pool;
 
 namespace LuaLab.ObjectsWrappers.Managers
 {
@@ -83,6 +85,7 @@ namespace LuaLab.ObjectsWrappers.Managers
         [PluginEvent]
         private void OnPlayerLeft(PlayerLeftEvent args)
         {
+            DictionaryPool<string, object>.Release(_luaPlayersByHub[args.Player.ReferenceHub].SessionVariables);
             _luaPlayersByHub.Remove(args.Player.ReferenceHub);
         }
 
@@ -99,6 +102,22 @@ namespace LuaLab.ObjectsWrappers.Managers
             get
             {
                 return _luaPlayersByHub.FirstOrDefault(n => n.Key.nicknameSync.MyNick == name).Value;
+            }
+        }
+
+        public LuaPlayer[] this[RoleTypeId role]
+        {
+            get
+            {
+                return _luaPlayersByHub.Where(n => n.Key.roleManager.CurrentRole.RoleTypeId == role).Select(n => n.Value).ToArray();
+            }
+        }
+
+        public LuaPlayer[] this[Team team]
+        {
+            get
+            {
+                return _luaPlayersByHub.Where(n => n.Key.roleManager.CurrentRole.Team == team).Select(n => n.Value).ToArray();
             }
         }
 

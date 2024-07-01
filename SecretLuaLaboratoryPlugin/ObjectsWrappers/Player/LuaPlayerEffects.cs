@@ -4,6 +4,7 @@ using MoonSharp.Interpreter.Interop;
 using SecretLuaLaboratoryPlugin.Objects.Player;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SecretLuaLaboratoryPlugin.ObjectsWrappers.Player
 {
@@ -29,6 +30,15 @@ namespace SecretLuaLaboratoryPlugin.ObjectsWrappers.Player
                 }
 
                 return null;
+            }
+        }
+
+        [MoonSharpVisible(true)]
+        public string[] ActiveEffects
+        {
+            get
+            {
+                return _luaPlayer.Hub.playerEffectsController.AllEffects.Where(n => n.Intensity > 0).Select(n => n.GetType().Name).ToArray();
             }
         }
 

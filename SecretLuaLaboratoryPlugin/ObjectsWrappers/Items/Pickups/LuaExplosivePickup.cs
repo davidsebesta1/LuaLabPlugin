@@ -1,6 +1,4 @@
-﻿using Footprinting;
-using InventorySystem;
-using InventorySystem.Items;
+﻿using InventorySystem;
 using InventorySystem.Items.Pickups;
 using InventorySystem.Items.ThrowableProjectiles;
 using Mirror;

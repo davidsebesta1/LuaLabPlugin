@@ -1,6 +1,8 @@
-﻿using MoonSharp.Interpreter;
+﻿using CommandSystem.Commands.RemoteAdmin.ServerEvent;
+using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
 using PluginAPI.Core;
+using Respawning;
 
 namespace LuaLab.ObjectsWrappers.Managers
 {
@@ -81,6 +83,19 @@ namespace LuaLab.ObjectsWrappers.Managers
         public void Restart(bool fast = false)
         {
             Round.Restart(fast);
+        }
+
+        [MoonSharpVisible(true)]
+        public void RespawnWave(SpawnableTeamType team)
+        {
+            RespawnManager.Singleton.ForceSpawnTeam(team);
+        }
+
+        [MoonSharpVisible(true)]
+        public void InstantRespawnWave(SpawnableTeamType team)
+        {
+            RespawnEffectsController.ExecuteAllEffects(RespawnEffectsController.EffectType.Selection, team);
+            RespawnManager.Singleton.ForceSpawnTeam(team);
         }
 
     }
