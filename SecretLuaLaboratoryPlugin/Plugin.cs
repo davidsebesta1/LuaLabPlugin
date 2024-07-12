@@ -51,6 +51,7 @@ namespace LuaLab
         public LuaServerManager LuaServerManager { get; private set; }
         public LuaPluginManager LuaPluginManager { get; private set; }
         public LuaFacilityManager LuaFacilityManager { get; private set; }
+        public LuaCommandsManager LuaCommandsManager { get; private set; }
         public LuaCassie LuaCassie { get; private set; }
 
         private Harmony _harmony;
@@ -59,7 +60,6 @@ namespace LuaLab
         [PluginPriority(LoadPriority.Highest)]
         public void Start()
         {
-
             if (!Config.IsEnabled)
             {
                 return;
@@ -76,6 +76,8 @@ namespace LuaLab
             MethodInfo postfixInfo = typeof(EventManagerPatch).GetMethod("Postfix");
             _harmony.Patch(methodInfo, postfix: new HarmonyMethod(postfixInfo));
 
+            _harmony.PatchAll();
+
             RegisterAllUserData();
             LuaCassie = new LuaCassie();
 
@@ -87,6 +89,7 @@ namespace LuaLab
             LuaServerManager = new LuaServerManager();
             LuaFacilityManager = new LuaFacilityManager();
 
+            LuaCommandsManager = new LuaCommandsManager();
             LuaScriptManager = new LuaScriptManager();
             LuaPluginManager = new LuaPluginManager();
             LuaPluginManager.Init();

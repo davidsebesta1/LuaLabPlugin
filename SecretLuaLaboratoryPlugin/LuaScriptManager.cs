@@ -118,6 +118,7 @@ namespace LuaLab
             script.Globals["Facility"] = Plugin.Instance.LuaFacilityManager;
             script.Globals["Server"] = Plugin.Instance.LuaServerManager;
             script.Globals["Cassie"] = Plugin.Instance.LuaCassie;
+            script.Globals["Commands"] = Plugin.Instance.LuaCommandsManager;
 
             //Enums
             script.Globals["RoleTypeId"] = UserData.CreateStatic<RoleTypeId>();

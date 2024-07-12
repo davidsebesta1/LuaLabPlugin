@@ -7,7 +7,6 @@ using PluginAPI.Events;
 using SecretLuaLaboratoryPlugin.Objects.Player;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.Pool;
 
 namespace LuaLab.ObjectsWrappers.Managers
 {

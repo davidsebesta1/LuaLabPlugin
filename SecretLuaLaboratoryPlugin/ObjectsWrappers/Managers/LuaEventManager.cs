@@ -1,5 +1,4 @@
-﻿using HarmonyLib;
-using LuaLab.ObjectsWrappers.Events;
+﻿using LuaLab.ObjectsWrappers.Events;
 using MoonSharp.Interpreter;
 using PluginAPI.Core;
 using PluginAPI.Enums;
@@ -65,7 +64,6 @@ namespace LuaLab.ObjectsWrappers.Managers
 
     public static class EventManagerPatch
     {
-        [HarmonyPostfix]
         public static void Postfix(ref IEventArguments args, ref bool __result)
         {
             try

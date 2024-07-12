@@ -88,6 +88,8 @@
     <Compile Include="Helpers\Descriptors\CustomUserDataDescriptor.cs" />
     <Compile Include="Helpers\ItemHelpers.cs" />
     <Compile Include="Helpers\LuaWaitHelper.cs" />
+    <Compile Include="ObjectsWrappers\Command\CommandArguments.cs" />
+    <Compile Include="ObjectsWrappers\Managers\LuaCommandsManager.cs" />
     <Compile Include="LuaPluginReloadManager.cs" />
     <Compile Include="LuaPlugin.cs" />
     <Compile Include="LuaPluginManager.cs" />
