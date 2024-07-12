@@ -9,7 +9,7 @@ Both command types have a single method that is inside of global variable `Comma
 `RegisterCommand(name, function, aliases, description)`<br>
 Paramaters:<br>
 `name` - String type for main name of the command.<br>
-`function` - Function with a single `CommandArgument` paramater for whole args and etc.<br>
+`function` - Function with a single [`CommandArgument`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Commands/CommandArguments.md) paramater for whole args and etc.<br>
 `alias` - Optional array of string alias for this command.<br>
 
 **Return type of true/false is required as this changes the console response icon and color.**<br>
