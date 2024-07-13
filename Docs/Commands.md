@@ -85,3 +85,11 @@ Commands:RegisterCommand("TestRACommand", function(args) args.Response = "remote
 
 Commands:ExecuteCommand("testracommand", {})
 ```
+
+```lua
+Commands:RegisterCommand("TestRACommand", function(args) args.Response = "remote admin" return false end, {"testtwo"}, "This is a test lua command description")
+
+success, args = Commands:ExecuteCommand("testracommand", {})
+
+print(Command execution " .. (success and "success" or "failed") .. ":" .. args.Response)
+```
