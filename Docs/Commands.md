@@ -68,3 +68,20 @@ Commands:RegisterCommand("TestRACommand", function(args) args.Response = "remote
 
 Commands:UnregisterCommand("testtwo") -- both options TestRACommand and testtwo are unregistered
 ```
+
+## Executing Commands
+Any command executio can be executed using<br>
+`ExecuteCommand(name, args)`<br>
+`name` - String type for name or alias of the command.<br>
+`args` - String array of command arguments.<br>
+Its response are two variables, first boolean value whenever the command succeded and second is [`CommandArgument`](https://github.com/davidsebesta1/LuaLabPlugin/blob/master/Docs/Objects/Commands/CommandArguments.md) that has other information about it.<br>
+**If player executes command from RA console, its response is automatically sent back to the console. Otherwise it is sent to the game console.**<br>
+**Command name or aliases are caps insensitive**<br>
+
+Code Example:
+
+```lua
+Commands:RegisterCommand("TestRACommand", function(args) args.Response = "remote admin" return false end, {"testtwo"}, "This is a test lua command description")
+
+Commands:ExecuteCommand("testracommand", {})
+```
